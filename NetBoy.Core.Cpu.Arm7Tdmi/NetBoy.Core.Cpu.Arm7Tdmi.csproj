@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExecutionCore.cs" />
+    <Compile Include="Instructions\Thumb\Arithmetic\AddInstruction.cs" />
+    <Compile Include="Instructions\Thumb\Arithmetic\SubInstruction.cs" />
     <Compile Include="Instructions\Thumb\Logical\AndInstruction.cs" />
     <Compile Include="Instructions\Thumb\Logical\ArithmeticShiftRightInstruction.cs" />
     <Compile Include="Instructions\Thumb\Logical\LogicalShiftLeftInstruction.cs" />
@@ -54,9 +56,7 @@
     <Compile Include="Registers\Register.cs" />
     <Compile Include="Registers\SavedProgramStatusRegister.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Instructions\Thumb\Arithmetic\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

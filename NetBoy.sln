@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBoy.Core.Cpu.Arm7Tdmi", "NetBoy.Core.Cpu.Arm7Tdmi\NetBoy.Core.Cpu.Arm7Tdmi.csproj", "{C4B2D2DA-E274-4C21-93C3-7E2D81B2AEA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBoy.Core.Rom", "Netboy.Core.Rom\NetBoy.Core.Rom.csproj", "{972B69FA-CB05-408F-81C2-E5D1EB6E284F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBoy.Shell", "NetBoy.Shell\NetBoy.Shell.csproj", "{DF1C6365-6A8E-4C9D-90EC-1F8AA4F65574}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{C4B2D2DA-E274-4C21-93C3-7E2D81B2AEA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4B2D2DA-E274-4C21-93C3-7E2D81B2AEA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4B2D2DA-E274-4C21-93C3-7E2D81B2AEA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{972B69FA-CB05-408F-81C2-E5D1EB6E284F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{972B69FA-CB05-408F-81C2-E5D1EB6E284F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{972B69FA-CB05-408F-81C2-E5D1EB6E284F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{972B69FA-CB05-408F-81C2-E5D1EB6E284F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF1C6365-6A8E-4C9D-90EC-1F8AA4F65574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF1C6365-6A8E-4C9D-90EC-1F8AA4F65574}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF1C6365-6A8E-4C9D-90EC-1F8AA4F65574}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF1C6365-6A8E-4C9D-90EC-1F8AA4F65574}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
