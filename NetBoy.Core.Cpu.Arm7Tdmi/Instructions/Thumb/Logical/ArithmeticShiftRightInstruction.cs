@@ -19,11 +19,11 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
 
             if ((opcode & 0x4000u) == 0x4000u)
             {
-                offset = executionCore.R[rs].Value & 0xFFu;
+                offset = executionCore.R(rs).Value & 0xFFu;
                 rs = rd;
             }
 
-            executionCore.R[rd].Value = executionCore.R[rs].Value >> (int)offset;
+            executionCore.R(rd).Value = executionCore.R(rs).Value >> (int)offset;
         }
 
         public override string InstructionAsString(uint opcode)

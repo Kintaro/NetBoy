@@ -19,7 +19,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
                 var rd = (opcode & 0x700u) >> 8;
                 var imm = opcode & 0xFFu;
 
-                executionCore.R[rd].Value = imm;
+                executionCore.R(rd).Value = imm;
             }
             // Move source register into destination register
             else if ((opcode & 0x400u) == 0x400u)
@@ -27,7 +27,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
                 var rd = opcode & 0x7u;
                 var rs = (opcode & 0x38u) >> 3;
 
-                executionCore.R[rd].Value = executionCore.R[rs].Value;
+                executionCore.R(rd).Value = executionCore.R(rs).Value;
             }
             // Move source register into destination register
             // and reset the carry and overflow flags
@@ -36,7 +36,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
                 var rd = opcode & 0x7u;
                 var rs = (opcode & 0x38u) >> 3;
 
-                executionCore.R[rd].Value = executionCore.R[rs].Value;
+                executionCore.R(rd).Value = executionCore.R(rs).Value;
                 executionCore.CurrentProgramStatusRegister.Carry = false;
                 executionCore.CurrentProgramStatusRegister.Overflow = false;
             }

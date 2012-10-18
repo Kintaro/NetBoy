@@ -22,16 +22,16 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic
                 var op = (opcode & 0x600u) >> 9;
 
                 if (op == 1)
-                    executionCore.R[rd].Value = executionCore.R[rs].Value - executionCore.R[rn].Value;
+                    executionCore.R(rd).Value = executionCore.R(rs).Value - executionCore.R(rn).Value;
                 else if (op == 3)
-                    executionCore.R[rd].Value = executionCore.R[rs].Value - rn;
+                    executionCore.R(rd).Value = executionCore.R(rs).Value - rn;
             }
             else if ((opcode & 0xF800u) >> 11 == 7)
             {
                 var rd = (opcode & 0x700u) >> 8;
                 var nn = opcode & 0xFFu;
 
-                executionCore.R[rd].Value = executionCore.R[rd].Value - nn;
+                executionCore.R(rd).Value = executionCore.R(rd).Value - nn;
             }
         }
 
