@@ -21,17 +21,25 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic
 
                 var op = (opcode & 0x600u) >> 9;
 
+                var rsV = BitConverter.ToInt32(BitConverter.GetBytes((ushort)executionCore.R(rd).Value), 0);
+                var rnV = BitConverter.ToInt32(BitConverter.GetBytes((ushort)executionCore.R(rn).Value), 0);
+                var r = rsV + rnV;
+
                 if (op == 0)
-                    executionCore.R(rd).Value = executionCore.R(rs).Value + executionCore.R(rn).Value;
+                    executionCore.R(rd).Value = BitConverter.ToUInt32(BitConverter.GetBytes(r), 0);
                 else if (op == 2)
-                    executionCore.R(rd).Value = executionCore.R(rs).Value + rn;
+                    executionCore.R(rd).Value = BitConverter.ToUInt32(BitConverter.GetBytes(executionCore.R(rs).Value + rn), 0);
             }
             else if ((opcode & 0xF800u) >> 11 == 6)
             {
                 var rd = (opcode & 0x700u) >> 8;
                 var nn = opcode & 0xFFu;
 
-                executionCore.R(rd).Value = executionCore.R(rd).Value + nn;
+                var rsV = BitConverter.ToInt16(BitConverter.GetBytes((ushort)executionCore.R(rd).Value), 0);
+                var rnV = BitConverter.ToInt16(BitConverter.GetBytes((ushort)nn), 0);
+                var r = rsV + rnV;
+
+                executionCore.R(rd).Value = BitConverter.ToUInt32(BitConverter.GetBytes(r), 0);
             }
             return false;
         }
