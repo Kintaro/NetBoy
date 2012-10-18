@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb;
-using NetBoy.Core.Cpu.Arm7Tdmi.Registers;
 using NetBoy.Core.Memory;
+using NetBoy.Core.Cpu.Arm7Tdmi.Registers;
+using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb;
+using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm;
 
 namespace NetBoy.Core.Cpu.Arm7Tdmi
 {
@@ -69,6 +70,11 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         /// <summary>
         /// 
         /// </summary>
+        private ArmInstructionInstantiator armInstructionInstantiator = new ArmInstructionInstantiator();
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Register PC { get { return this.baseRegisters[this.modeToRegister[SystemMode * 16 + 15]]; } }
 
         /// <summary>
@@ -102,13 +108,17 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         {
             if (this.CurrentProgramStatusRegister.ThumbMode)
             {
-                var high = opcode >> 12;
-                var low = (opcode & 0x0F00u) >> 8;
+                var high = (opcode & 0xF000u) >> 12;
+                var low  = (opcode & 0x0F00u) >>  8;
                 Console.WriteLine("0x" + this.PC.Value.ToString("X") + "> (0x" + opcode.ToString("X") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(opcode));
                 return this.thumbInstructionInstantiator.Instructions[high][low].Execute(this, opcode);
             }
             else
             {
+                var high = (opcode & 0xF0000000u) >> 28;
+                var low  = (opcode & 0x0F000000u) >> 24;
+                Console.WriteLine("0x" + this.PC.Value.ToString("X") + "> (0x" + opcode.ToString("X") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(opcode));
+                return this.armInstructionInstantiator.Instructions[high][low].Execute(this, opcode);
             }
 
             throw new NotSupportedException();
