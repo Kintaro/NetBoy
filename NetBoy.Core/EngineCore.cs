@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using NetBoy.Core.Memory;
+using NetBoy.Core.Cpu.Arm7Tdmi;
 
 namespace NetBoy.Core
 {
@@ -17,7 +18,8 @@ namespace NetBoy.Core
         /// <summary>
         /// 
         /// </summary>
-        private MemoryManager memoryManager = new MemoryManager();
+        private MemoryManager memoryManager;
+        private ExecutionCore executionCore;
 
         /// <summary>
         /// 
@@ -26,7 +28,7 @@ namespace NetBoy.Core
         public void LoadBios(string path)
         {
             var reader = new BinaryReader(new FileStream(path, FileMode.Open));
-            this.memoryManager.InternalMemory.Bios.Allocate();
+            this.memoryManager.InternalMemory.Bios.SetMemory(reader.ReadBytes((int)reader.BaseStream.Length));
         }
 
         /// <summary>
@@ -34,7 +36,12 @@ namespace NetBoy.Core
         /// </summary>
         public void Run(string pathToBios, string pathToRom)
         {
+            this.memoryManager = new MemoryManager();
+            this.executionCore = new ExecutionCore(this.memoryManager);
+
             this.LoadBios(pathToBios);
+            this.executionCore.PC.Value = InternalMemory.BiosStart;
+            this.executionCore.Run();
         }
     }
 }

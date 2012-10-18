@@ -30,23 +30,23 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
                 new LogicalShiftLeftInstruction(),
                 new LogicalShiftRightInstruction(),
                 new ArithmeticShiftRightInstruction(),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 new OrInstruction(),
-                null,
-                null,
+                new NopInstruction(),
+                new NopInstruction(),
                 new MoveNegatedInstruction(),
             };
 
-            public override void Execute(ExecutionCore executionCore, uint opcode)
+            public override bool Execute(ExecutionCore executionCore, uint opcode)
             {
                 var op = (opcode & 0x3C0u) >> 6;
-                this.Instructions[op].Execute(executionCore, opcode);
+                return this.Instructions[op].Execute(executionCore, opcode);
             }
         }
 
@@ -109,6 +109,14 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
                 new MoveInstruction(),
                 new MoveInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 0011
             new ThumbInstruction[]
@@ -141,55 +149,261 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
                 new AluInstructionInstantiator(),
                 new AluInstructionInstantiator(),
                 // 01--
-                null,
-                null,
+                new NopInstruction(),
+                new NopInstruction(),
                 new MoveInstruction(),
-                null,
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 0101
             new ThumbInstruction[]
             {
+                // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 0110
             new ThumbInstruction[]
             {
+                // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 0111
             new ThumbInstruction[]
             {
+                // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1000
             new ThumbInstruction[]
             {
+                // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1001
             new ThumbInstruction[]
             {
+                // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1010
             new ThumbInstruction[]
             {
+                // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1011
             new ThumbInstruction[]
             {
+                // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1100
             new ThumbInstruction[]
             {
+                // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1101
             new ThumbInstruction[]
             {
+                // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1110
             new ThumbInstruction[]
             {
+                // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1111
             new ThumbInstruction[]
             {
+                // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
         };
     }

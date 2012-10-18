@@ -129,5 +129,14 @@ namespace NetBoy.Core.Memory
         {
             this[index + 0] = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        public void SetMemory(byte[] p)
+        {
+            this.memory = p;
+        }
     }
 }

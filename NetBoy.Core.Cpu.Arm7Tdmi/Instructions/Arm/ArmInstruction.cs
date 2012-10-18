@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
+namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public abstract class ThumbInstruction
+    public abstract class ArmInstruction
     {
         /// <summary>
         /// 

@@ -40,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExecutionCore.cs" />
+    <Compile Include="Instructions\Arm\ArmInstruction.cs" />
+    <Compile Include="Instructions\Arm\ArmInstructionInstantiator.cs" />
+    <Compile Include="Instructions\Thumb\Branch\BxInstruction.cs" />
     <Compile Include="Instructions\Thumb\Arithmetic\AddInstruction.cs" />
     <Compile Include="Instructions\Thumb\Arithmetic\SubInstruction.cs" />
     <Compile Include="Instructions\Thumb\Logical\AndInstruction.cs" />
@@ -58,7 +61,13 @@
     <Compile Include="Registers\SavedProgramStatusRegister.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Instructions\Memory\" />
+    <Folder Include="Instructions\Thumb\Memory\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NetBoy.Core.Memory\NetBoy.Core.Memory.csproj">
+      <Project>{fee36d59-1a42-4c33-b038-6838f9accee8}</Project>
+      <Name>NetBoy.Core.Memory</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

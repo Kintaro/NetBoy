@@ -11,7 +11,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
     /// </summary>
     public sealed class MoveInstruction : ThumbInstruction
     {
-        public override void Execute(ExecutionCore executionCore, uint opcode)
+        public override bool Execute(ExecutionCore executionCore, uint opcode)
         {
             // Move an immediate value into the destination register
             if ((opcode & 0x2000u) == 0x2000u)
@@ -40,6 +40,8 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
                 executionCore.CurrentProgramStatusRegister.Carry = false;
                 executionCore.CurrentProgramStatusRegister.Overflow = false;
             }
+
+            return false;
         }
 
         public override string InstructionAsString(uint opcode)

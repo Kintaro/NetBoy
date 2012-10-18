@@ -14,7 +14,7 @@ namespace NetBoy.Core.Memory
         public const uint InternalMemoryStart = 0x0u;
         public const uint InternalMemoryEnd = 0x40003FE;
 
-        public const uint BiosStart = 0u;
+        public const uint BiosStart = 0x0u;
         public const uint BiosEnd = 0x3FFFu;
         public MemoryRegion Bios = new MemoryRegion(BiosStart, BiosEnd);
 

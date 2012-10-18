@@ -11,7 +11,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
     /// </summary>
     public sealed class LogicalShiftLeftInstruction : ThumbInstruction
     {
-        public override void Execute(ExecutionCore executionCore, uint opcode)
+        public override bool Execute(ExecutionCore executionCore, uint opcode)
         {
             var offset = (opcode & 0x7C0u) >> 6;
             var rd = opcode & 0x7u;
@@ -24,6 +24,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
             }
 
             executionCore.R(rd).Value = executionCore.R(rs).Value << (int)offset;
+            return false;
         }
 
         public override string InstructionAsString(uint opcode)

@@ -11,7 +11,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic
     /// </summary>
     public sealed class AddInstruction : ThumbInstruction
     {
-        public override void Execute(ExecutionCore executionCore, uint opcode)
+        public override bool Execute(ExecutionCore executionCore, uint opcode)
         {
             if ((opcode & 0xF800u) >> 11 == 3)
             {
@@ -33,6 +33,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic
 
                 executionCore.R(rd).Value = executionCore.R(rd).Value + nn;
             }
+            return false;
         }
 
         public override string InstructionAsString(uint opcode)
