@@ -14,21 +14,33 @@ namespace NetBoy.Core.Memory
         public const uint DisplayMemoryStart = 0x5000000u;
         public const uint DisplayMemoryEnd = 0x70003FFu;
 
-        public byte[] ObjPalette = new byte[0x3FFu];
-        public uint ObjPaletteStart = 0x5000000u;
-        public uint ObjPaletteEnd = 0x50003FFu;
+        public const uint ObjPaletteStart = 0x5000000u;
+        public const uint ObjPaletteEnd = 0x50003FFu;
+        public MemoryRegion ObjPalette = new MemoryRegion(ObjAttributesStart, ObjAttributesEnd);
 
-        public byte[] Vram = new byte[0x6017FFFu];
-        public uint VramStart = 0x6000000u;
-        public uint VramEnd = 0x6017FFFu;
+        public const uint VramStart = 0x6000000u;
+        public const uint VramEnd = 0x6017FFFu;
+        public MemoryRegion Vram = new MemoryRegion(VramStart, VramEnd);
 
-        public byte[] ObjAttributes = new byte[0x3FFu];
-        public uint ObjAttributesStart = 0x7000000u;
-        public uint ObjAttributesEnd = 0x70003FFu;
+        public const uint ObjAttributesStart = 0x7000000u;
+        public const uint ObjAttributesEnd = 0x70003FFu;
+        public MemoryRegion ObjAttributes = new MemoryRegion(ObjAttributesStart, ObjAttributesEnd);
 
         public DisplayMemory()
             : base(DisplayMemoryStart, DisplayMemoryEnd)
         {
+        }
+
+        public override MemoryRegion GetMemoryRegionForAddress(uint address)
+        {
+            if (this.ObjPalette.IsAddressWithinMemory(address))
+                return this.ObjPalette;
+            else if (this.Vram.IsAddressWithinMemory(address))
+                return this.Vram;
+            else if (this.ObjAttributes.IsAddressWithinMemory(address))
+                return this.ObjAttributes;
+
+            throw new NotSupportedException();
         }
     }
 }

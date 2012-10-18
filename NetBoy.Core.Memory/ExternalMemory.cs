@@ -14,25 +14,39 @@ namespace NetBoy.Core.Memory
         public const uint ExternalMemoryStart = 0x8000000u;
         public const uint ExternalMemoryEnd = 0xE00FFFFu;
 
-        public byte[] WaitState0 = new byte[0x1FFFFFFu];
-        public readonly uint WaitState0Start = 0x8000000u;
-        public readonly uint WaitState0End = 0x9FFFFFFu;
+        public const uint WaitState0Start = 0x8000000u;
+        public const uint WaitState0End = 0x9FFFFFFu;
+        public MemoryRegion WaitState0 = new MemoryRegion(WaitState0Start, WaitState0End);
 
-        public byte[] WaitState1 = new byte[0x1FFFFFFu];
-        public readonly uint WaitState1Start = 0xA000000u;
-        public readonly uint WaitState1End = 0xBFFFFFFu;
+        public const uint WaitState1Start = 0xA000000u;
+        public const uint WaitState1End = 0xBFFFFFFu;
+        public MemoryRegion WaitState1 = new MemoryRegion(WaitState1Start, WaitState1End);
 
-        public byte[] WaitState2 = new byte[0x1FFFFFFu];
-        public readonly uint WaitState2Start = 0xC000000u;
-        public readonly uint WaitState2End = 0xDFFFFFFu;
+        public const uint WaitState2Start = 0xC000000u;
+        public const uint WaitState2End = 0xDFFFFFFu;
+        public MemoryRegion WaitState2 = new MemoryRegion(WaitState2Start, WaitState2End);
 
-        public byte[] Sram = new byte[0xFFFF];
-        public readonly uint SramStart = 0xE000000u;
-        public readonly uint SramEnd = 0xE00FFFF;
+        public const uint SramStart = 0xE000000u;
+        public const uint SramEnd = 0xE00FFFF;
+        public MemoryRegion Sram = new MemoryRegion(SramStart, SramEnd);
 
         public ExternalMemory()
             : base(ExternalMemoryStart, ExternalMemoryEnd)
         {
+        }
+
+        public override MemoryRegion GetMemoryRegionForAddress(uint address)
+        {
+            if (this.WaitState0.IsAddressWithinMemory(address))
+                return this.WaitState0;
+            else if (this.WaitState1.IsAddressWithinMemory(address))
+                return this.WaitState1;
+            else if (this.WaitState2.IsAddressWithinMemory(address))
+                return this.WaitState2;
+            else if (this.Sram.IsAddressWithinMemory(address))
+                return this.Sram;
+
+            throw new NotSupportedException();
         }
     }
 }

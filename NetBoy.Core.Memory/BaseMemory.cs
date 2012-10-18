@@ -8,7 +8,7 @@ namespace NetBoy.Core.Memory
     /// <summary>
     /// 
     /// </summary>
-    public class BaseMemory
+    public abstract class BaseMemory
     {
         /// <summary>
         /// 
@@ -39,5 +39,7 @@ namespace NetBoy.Core.Memory
         {
             return address >= this.memoryStart && address <= this.memoryEnd;
         }
+
+        public abstract MemoryRegion GetMemoryRegionForAddress(uint address);
     }
 }
