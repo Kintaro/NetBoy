@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBoy.Core.Rom", "Netboy.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBoy.Shell", "NetBoy.Shell\NetBoy.Shell.csproj", "{DF1C6365-6A8E-4C9D-90EC-1F8AA4F65574}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBoy.Core.Memory", "NetBoy.Core.Memory\NetBoy.Core.Memory.csproj", "{FEE36D59-1A42-4C33-B038-6838F9ACCEE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBoy.Core", "NetBoy.Core\NetBoy.Core.csproj", "{DA8F382F-A5E9-4B58-AA3D-C2428ED99D2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,14 @@ Global
 		{DF1C6365-6A8E-4C9D-90EC-1F8AA4F65574}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF1C6365-6A8E-4C9D-90EC-1F8AA4F65574}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF1C6365-6A8E-4C9D-90EC-1F8AA4F65574}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEE36D59-1A42-4C33-B038-6838F9ACCEE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE36D59-1A42-4C33-B038-6838F9ACCEE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE36D59-1A42-4C33-B038-6838F9ACCEE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE36D59-1A42-4C33-B038-6838F9ACCEE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA8F382F-A5E9-4B58-AA3D-C2428ED99D2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8F382F-A5E9-4B58-AA3D-C2428ED99D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8F382F-A5E9-4B58-AA3D-C2428ED99D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8F382F-A5E9-4B58-AA3D-C2428ED99D2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

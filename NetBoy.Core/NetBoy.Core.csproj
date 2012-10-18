@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C4B2D2DA-E274-4C21-93C3-7E2D81B2AEA5}</ProjectGuid>
+    <ProjectGuid>{DA8F382F-A5E9-4B58-AA3D-C2428ED99D2D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NetBoy.Core.Cpu.Arm7Tdmi</RootNamespace>
-    <AssemblyName>NetBoy.Core.Cpu.Arm7Tdmi</AssemblyName>
+    <RootNamespace>NetBoy.Core</RootNamespace>
+    <AssemblyName>NetBoy.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,25 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExecutionCore.cs" />
-    <Compile Include="Instructions\Thumb\Arithmetic\AddInstruction.cs" />
-    <Compile Include="Instructions\Thumb\Arithmetic\SubInstruction.cs" />
-    <Compile Include="Instructions\Thumb\Logical\AndInstruction.cs" />
-    <Compile Include="Instructions\Thumb\Logical\ArithmeticShiftRightInstruction.cs" />
-    <Compile Include="Instructions\Thumb\Logical\LogicalShiftLeftInstruction.cs" />
-    <Compile Include="Instructions\Thumb\Logical\LogicalShiftRightInstruction.cs" />
-    <Compile Include="Instructions\Thumb\Logical\MoveInstruction.cs" />
-    <Compile Include="Instructions\Thumb\Logical\MoveNegatedInstruction.cs" />
-    <Compile Include="Instructions\Thumb\Logical\NopInstruction.cs" />
-    <Compile Include="Instructions\Thumb\Logical\OrInstruction.cs" />
-    <Compile Include="Instructions\Thumb\ThumbInstruction.cs" />
-    <Compile Include="Instructions\Thumb\ThumbInstructionInstantiator.cs" />
+    <Compile Include="EngineCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registers\CurrentProgramStatusRegister.cs" />
-    <Compile Include="Registers\Register.cs" />
-    <Compile Include="Registers\SavedProgramStatusRegister.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\NetBoy.Core.Cpu.Arm7Tdmi\NetBoy.Core.Cpu.Arm7Tdmi.csproj">
+      <Project>{c4b2d2da-e274-4c21-93c3-7e2d81b2aea5}</Project>
+      <Name>NetBoy.Core.Cpu.Arm7Tdmi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetBoy.Core.Memory\NetBoy.Core.Memory.csproj">
+      <Project>{fee36d59-1a42-4c33-b038-6838f9accee8}</Project>
+      <Name>NetBoy.Core.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Netboy.Core.Rom\NetBoy.Core.Rom.csproj">
+      <Project>{972b69fa-cb05-408f-81c2-e5d1eb6e284f}</Project>
+      <Name>NetBoy.Core.Rom</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
