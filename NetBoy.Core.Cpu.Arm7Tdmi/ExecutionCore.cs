@@ -29,20 +29,20 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         /// <summary>
         /// 
         /// </summary>
-        private int[][] modeToRegister = new int[][]
+        private int[] modeToRegister = new int[]
         {
             // system
-            new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }, 
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
             // fiq
-            new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 16, 17, 18, 19, 20, 21, 22, 15 },
+            0, 1, 2, 3, 4, 5, 6, 7, 16, 17, 18, 19, 20, 21, 22, 15,
             // supervisor
-            new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 16, 17, 18, 19, 20, 23, 24, 15 },
+            0, 1, 2, 3, 4, 5, 6, 7, 16, 17, 18, 19, 20, 23, 24, 15,
             // abort
-            new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 16, 17, 18, 19, 20, 25, 26, 15 },
+            0, 1, 2, 3, 4, 5, 6, 7, 16, 17, 18, 19, 20, 25, 26, 15,
             // irq
-            new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 16, 17, 18, 19, 20, 27, 28, 15 },
+            0, 1, 2, 3, 4, 5, 6, 7, 16, 17, 18, 19, 20, 27, 28, 15,
             // undefined
-            new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 16, 17, 18, 19, 20, 29, 30, 15 },
+            0, 1, 2, 3, 4, 5, 6, 7, 16, 17, 18, 19, 20, 29, 30, 15,
         };
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         /// <returns></returns>
         public Register R(uint registerNumber)
         {
-            return this.baseRegisters[this.modeToRegister[this.currentMode][registerNumber]];
+            return this.baseRegisters[this.modeToRegister[this.currentMode * 16 + registerNumber]];
         }
 
         /// <summary>
