@@ -14,30 +14,25 @@ namespace NetBoy.Core.Memory
         public const uint InternalMemoryStart = 0x0u;
         public const uint InternalMemoryEnd = 0x40003FE;
 
-        public byte[] Bios;
-        public uint BiosStart = 0u;
-        public uint BiosEnd = 0x3FFFu;
+        public const uint BiosStart = 0u;
+        public const uint BiosEnd = 0x3FFFu;
+        public MemoryRegion Bios = new MemoryRegion(BiosStart, BiosEnd);
 
-        public byte[] OnboardWorkRam = new byte[0x3FFFFu];
-        public uint OnboardWorkRamStart = 0x2000000u;
-        public uint OnboardWorkRamEnd = 0x203FFFFu;
+        public const uint OnboardWorkRamStart = 0x2000000u;
+        public const uint OnboardWorkRamEnd = 0x203FFFFu;
+        public MemoryRegion OnboardWorkRam = new MemoryRegion(OnboardWorkRamStart, OnboardWorkRamEnd);
 
-        public byte[] InChipWorkRam = new byte[0x7FFFu];
-        public uint InChipWorkRamStart = 0x3000000u;
-        public uint InChipWorkRamEnd = 0x3007FFFu;
+        public const uint InChipWorkRamStart = 0x3000000u;
+        public const uint InChipWorkRamEnd = 0x3007FFFu;
+        public MemoryRegion InChipWorkRam = new MemoryRegion(InChipWorkRamStart, InChipWorkRamEnd);
 
-        public byte[] IORegisters = new byte[0x3FEu];
-        public uint IORegistersStart = 0x4000000u;
-        public uint IORegistersEnd = 0x40003FEu;
+        public const uint IORegistersStart = 0x4000000u;
+        public const uint IORegistersEnd = 0x40003FEu;
+        public MemoryRegion IORegisters = new MemoryRegion(IORegistersStart, IORegistersEnd);
 
         public InternalMemory()
             : base(InternalMemoryStart, InternalMemoryEnd)
         {
-        }
-
-        public void CreateBiosMemory()
-        {
-            this.Bios = new byte[0x3FFF];
         }
     }
 }

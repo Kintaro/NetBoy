@@ -43,6 +43,7 @@
     <Compile Include="DisplayMemory.cs" />
     <Compile Include="ExternalMemory.cs" />
     <Compile Include="InternalMemory.cs" />
+    <Compile Include="MemoryRegion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

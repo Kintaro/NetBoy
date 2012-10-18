@@ -26,7 +26,7 @@ namespace NetBoy.Core
         public void LoadBios(string path)
         {
             var reader = new BinaryReader(new FileStream(path, FileMode.Open));
-            this.internalMemory.Bios = reader.ReadBytes((int)reader.BaseStream.Length);
+            this.internalMemory.Bios.Allocate();
         }
 
         /// <summary>
