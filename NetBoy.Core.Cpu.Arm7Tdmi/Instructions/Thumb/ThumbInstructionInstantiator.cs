@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical;
+using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic;
 
 namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
 {
@@ -86,14 +87,14 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
                 new ArithmeticShiftRightInstruction(),
                 new ArithmeticShiftRightInstruction(),
                 // 1--- (add/sub)
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                new AddInstruction(),
+                new AddInstruction(),
+                new SubInstruction(),
+                new SubInstruction(),
+                new AddInstruction(),
+                new AddInstruction(),
+                new SubInstruction(),
+                new SubInstruction(),
             },
             // 0010
             new ThumbInstruction[]
@@ -113,8 +114,23 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
             new ThumbInstruction[]
             {
                 // 0---
-                null,
+                new AddInstruction(),
+                new AddInstruction(),
+                new AddInstruction(),
+                new AddInstruction(),
+                new AddInstruction(),
+                new AddInstruction(),
+                new AddInstruction(),
+                new AddInstruction(),
                 // 1---
+                new SubInstruction(),
+                new SubInstruction(),
+                new SubInstruction(),
+                new SubInstruction(),
+                new SubInstruction(),
+                new SubInstruction(),
+                new SubInstruction(),
+                new SubInstruction(),
             },
             // 0100
             new ThumbInstruction[]
