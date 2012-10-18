@@ -40,6 +40,11 @@ namespace NetBoy.Core.Memory
             return address >= this.memoryStart && address <= this.memoryEnd;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
         public abstract MemoryRegion GetMemoryRegionForAddress(uint address);
     }
 }

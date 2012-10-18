@@ -17,7 +17,7 @@ namespace NetBoy.Core
         /// <summary>
         /// 
         /// </summary>
-        private InternalMemory internalMemory = new InternalMemory();
+        private MemoryManager memoryManager = new MemoryManager();
 
         /// <summary>
         /// 
@@ -26,7 +26,7 @@ namespace NetBoy.Core
         public void LoadBios(string path)
         {
             var reader = new BinaryReader(new FileStream(path, FileMode.Open));
-            this.internalMemory.Bios.Allocate();
+            this.memoryManager.InternalMemory.Bios.Allocate();
         }
 
         /// <summary>
