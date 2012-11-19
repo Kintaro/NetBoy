@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Branch;
 using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Arithmetic;
+using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Logical;
 
 namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
 {
@@ -20,93 +21,221 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 0001
             new ArmInstruction[]
             {
                 // 0---
-                null,
-                null,
-                null,
-                null,
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 new CmpInstruction(),
                 new CmpInstruction(),
-                null,
-                null,
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 0010
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 0011
             new ArmInstruction[]
             {
                 // 0---
-                null,
-                null,
-                null,
-                null,
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 new CmpInstruction(),
                 new CmpInstruction(),
-                null,
-                null,
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 0100
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 0101
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 0110
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 0111
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1000
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1001
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1010
             new ArmInstruction[]
@@ -134,31 +263,111 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1100
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1101
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1110
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
             // 1111
             new ArmInstruction[]
             {
                 // 0---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
                 // 1---
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
+                new NopInstruction(),
             },
         };
     }
