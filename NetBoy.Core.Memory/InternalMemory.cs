@@ -33,6 +33,10 @@ namespace NetBoy.Core.Memory
         public InternalMemory()
             : base(InternalMemoryStart, InternalMemoryEnd)
         {
+            this.Bios.Allocate();
+            this.OnboardWorkRam.Allocate();
+            this.InChipWorkRam.Allocate();
+            this.IORegisters.Allocate();
         }
 
         public override MemoryRegion GetMemoryRegionForAddress(uint address)
@@ -43,6 +47,8 @@ namespace NetBoy.Core.Memory
                 return this.OnboardWorkRam;
             else if (this.InChipWorkRam.IsAddressWithinMemory(address))
                 return this.InChipWorkRam;
+            else if (this.IORegisters.IsAddressWithinMemory(address))
+                return this.IORegisters;
 
             throw new NotSupportedException();
         }

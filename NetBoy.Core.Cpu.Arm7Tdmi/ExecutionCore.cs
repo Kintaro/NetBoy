@@ -26,7 +26,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         /// <summary>
         /// 
         /// </summary>
-        private MemoryManager memoryManager;
+        internal MemoryManager memoryManager;
         /// <summary>
         /// 
         /// </summary>

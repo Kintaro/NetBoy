@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitHelper.cs" />
     <Compile Include="ExecutionCore.cs" />
     <Compile Include="Instructions\Arm\Arithmetic\CmpInstruction.cs" />
     <Compile Include="Instructions\Arm\ArmCondition.cs" />
@@ -48,6 +49,8 @@
     <Compile Include="Instructions\Arm\Branch\BxInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\MoveInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\NopInstruction.cs" />
+    <Compile Include="Instructions\Arm\Logical\TeqInstruction.cs" />
+    <Compile Include="Instructions\Arm\Memory\LdrInstruction.cs" />
     <Compile Include="Instructions\Thumb\Branch\BxInstruction.cs" />
     <Compile Include="Instructions\Thumb\Arithmetic\AddInstruction.cs" />
     <Compile Include="Instructions\Thumb\Arithmetic\SubInstruction.cs" />
