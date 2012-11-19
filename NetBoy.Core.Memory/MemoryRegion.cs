@@ -79,7 +79,7 @@ namespace NetBoy.Core.Memory
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public uint Read16(uint index)
+        public ushort Read16(uint index)
         {
             return BitConverter.ToUInt16(this.memory, (int)(index - this.memoryStart));
         }

@@ -11,7 +11,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
     /// </summary>
     public sealed class NopInstruction : ThumbInstruction
     {
-        public override bool Execute(ExecutionCore executionCore, uint opcode)
+        public override bool Execute(ExecutionCore executionCore, ushort opcode)
         {
             return false;
         }

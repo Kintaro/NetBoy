@@ -11,7 +11,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
     /// </summary>
     public sealed class AndInstruction : ThumbInstruction
     {
-        public override bool Execute(ExecutionCore executionCore, uint opcode)
+        public override bool Execute(ExecutionCore executionCore, ushort opcode)
         {
             var rd = opcode & 0x7u;
             var rs = (opcode & 0x38u) >> 3;
@@ -20,7 +20,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
             return false;
         }
 
-        public override string InstructionAsString(uint opcode)
+        public override string InstructionAsString(ushort opcode)
         {
             var rd = opcode & 0x7u;
             var rs = (opcode & 0x38u) >> 3;

@@ -11,21 +11,21 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
     /// </summary>
     public sealed class MoveInstruction : ThumbInstruction
     {
-        public override bool Execute(ExecutionCore executionCore, uint opcode)
+        public override bool Execute(ExecutionCore executionCore, ushort opcode)
         {
             // Move an immediate value into the destination register
             if ((opcode & 0x2000u) == 0x2000u)
             {
-                var rd = (opcode & 0x700u) >> 8;
-                var imm = opcode & 0xFFu;
+                short rd = (short)((opcode & 0x700u) >> 8);
+                short imm = (short)(opcode & 0xFFu);
 
-                executionCore.R(rd).Value = imm;
+                executionCore.R(rd).Value = (uint)imm;
             }
             // Move source register into destination register
             else if ((opcode & 0x400u) == 0x400u)
             {
-                var rd = opcode & 0x7u;
-                var rs = (opcode & 0x38u) >> 3;
+                short rd = (short)(opcode & 0x7u);
+                short rs = (short)((opcode & 0x38u) >> 3);
 
                 executionCore.R(rd).Value = executionCore.R(rs).Value;
             }
@@ -33,8 +33,8 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
             // and reset the carry and overflow flags
             else if ((opcode & 0x1800u) == 0x1800u)
             {
-                var rd = opcode & 0x7u;
-                var rs = (opcode & 0x38u) >> 3;
+                short rd = (short)(opcode & 0x7u);
+                short rs = (short)((opcode & 0x38u) >> 3);
 
                 executionCore.R(rd).Value = executionCore.R(rs).Value;
                 executionCore.CurrentProgramStatusRegister.Carry = false;
@@ -44,7 +44,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
             return false;
         }
 
-        public override string InstructionAsString(uint opcode)
+        public override string InstructionAsString(ushort opcode)
         {
             // Move an immediate value into the destination register
             if ((opcode & 0x2000u) == 0x2000u)

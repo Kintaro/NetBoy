@@ -16,11 +16,11 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
         /// </summary>
         /// <param name="executionCore"></param>
         /// <param name="opcode"></param>
-        public abstract bool Execute(ExecutionCore executionCore, uint opcode);
+        public abstract bool Execute(ExecutionCore executionCore, ushort opcode);
         /// <summary>
         /// 
         /// </summary>
-        public virtual string InstructionAsString(uint opcode)
+        public virtual string InstructionAsString(ushort opcode)
         {
             return "not yet represented";
         }

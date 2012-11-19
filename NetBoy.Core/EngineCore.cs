@@ -19,6 +19,9 @@ namespace NetBoy.Core
         /// 
         /// </summary>
         private MemoryManager memoryManager;
+        /// <summary>
+        /// 
+        /// </summary>
         private ExecutionCore executionCore;
 
         /// <summary>

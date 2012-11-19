@@ -13,11 +13,11 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Registers
     /// </summary>
     public class CurrentProgramStatusRegister : Register
     {
-        public const uint SignedFlag = 0x80000000u;
-        public const uint ZeroFlag = 0x40000000u;
-        public const uint CarryFlag = 0x20000000u;
-        public const uint OverflowFlag = 0x10000000u;
-        public const uint StickyOverflowFlag = 0x8000000u;
+        public const uint SignedFlag = 0x80000000;
+        public const uint ZeroFlag = 0x40000000;
+        public const uint CarryFlag = 0x20000000;
+        public const uint OverflowFlag = 0x10000000;
+        public const uint StickyOverflowFlag = 0x8000000;
         public const uint IrqDisableFlag = 0x40;
         public const uint FiqDisableFlag = 0x20;
         public const uint StateFlag = 0x10;

@@ -11,7 +11,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic
     /// </summary>
     public sealed class AddInstruction : ThumbInstruction
     {
-        public override bool Execute(ExecutionCore executionCore, uint opcode)
+        public override bool Execute(ExecutionCore executionCore, ushort opcode)
         {
             if ((opcode & 0xF800u) >> 11 == 3)
             {
@@ -21,30 +21,48 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic
 
                 var op = (opcode & 0x600u) >> 9;
 
-                var rsV = BitConverter.ToInt32(BitConverter.GetBytes((ushort)executionCore.R(rd).Value), 0);
-                var rnV = BitConverter.ToInt32(BitConverter.GetBytes((ushort)executionCore.R(rn).Value), 0);
-                var r = rsV + rnV;
+                short rsV = (short)executionCore.R(rs).Value;
+                short rnV = (short)executionCore.R(rn).Value;
+                short r = 0;
+
+                try
+                {
+                    r = checked((short)(rsV + rnV));
+                }
+                catch (OverflowException)
+                {
+                    executionCore.CurrentProgramStatusRegister.Overflow = true;
+                }
 
                 if (op == 0)
-                    executionCore.R(rd).Value = BitConverter.ToUInt32(BitConverter.GetBytes(r), 0);
+                    executionCore.R(rd).Value = (uint)r;
                 else if (op == 2)
-                    executionCore.R(rd).Value = BitConverter.ToUInt32(BitConverter.GetBytes(executionCore.R(rs).Value + rn), 0);
+                    executionCore.R(rd).Value = (uint)(rsV + (short)rn);
             }
             else if ((opcode & 0xF800u) >> 11 == 6)
             {
                 var rd = (opcode & 0x700u) >> 8;
                 var nn = opcode & 0xFFu;
 
-                var rsV = BitConverter.ToInt16(BitConverter.GetBytes((ushort)executionCore.R(rd).Value), 0);
-                var rnV = BitConverter.ToInt16(BitConverter.GetBytes((ushort)nn), 0);
-                var r = rsV + rnV;
+                var rdV = (short)executionCore.R(rd).Value;
+                var rnV = (short)nn;
+                short r = 0;
 
-                executionCore.R(rd).Value = BitConverter.ToUInt32(BitConverter.GetBytes(r), 0);
+                try
+                {
+                    r = checked((short)(rdV + rnV));
+                }
+                catch (OverflowException)
+                {
+                    executionCore.CurrentProgramStatusRegister.Overflow = true;
+                }
+
+                executionCore.R(rd).Value = (uint)r;
             }
             return false;
         }
 
-        public override string InstructionAsString(uint opcode)
+        public override string InstructionAsString(ushort opcode)
         {
             if ((opcode & 0xF800u) >> 11 == 3)
             {

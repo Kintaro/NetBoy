@@ -11,7 +11,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Branch
     /// </summary>
     public sealed class BxInstruction : ThumbInstruction
     {
-        public override bool Execute(ExecutionCore executionCore, uint opcode)
+        public override bool Execute(ExecutionCore executionCore, ushort opcode)
         {
             var hd = (opcode & 0x80u) >> 7;
             var hs = (opcode & 0x40u) >> 6;
@@ -19,7 +19,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Branch
             var rs = (opcode & 0x38u) >> 3;
             var rd = (opcode & 0x7u);
 
-            executionCore.JumpToAddress(executionCore.R(rs).Value);
+            executionCore.JumpToAddress((uint)executionCore.R(rs).Value);
             return true;
         }
     }

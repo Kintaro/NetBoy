@@ -11,23 +11,23 @@ namespace NetBoy.Core.Memory
     /// </summary>
     public sealed class InternalMemory : BaseMemory
     {
-        public const uint InternalMemoryStart = 0x0u;
-        public const uint InternalMemoryEnd = 0x40003FE;
+        public const int InternalMemoryStart = 0x0;
+        public const int InternalMemoryEnd = 0x40003FE;
 
-        public const uint BiosStart = 0x0u;
-        public const uint BiosEnd = 0x3FFFu;
+        public const int BiosStart = 0x0;
+        public const int BiosEnd = 0x3FFF;
         public MemoryRegion Bios = new MemoryRegion(BiosStart, BiosEnd);
 
-        public const uint OnboardWorkRamStart = 0x2000000u;
-        public const uint OnboardWorkRamEnd = 0x203FFFFu;
+        public const int OnboardWorkRamStart = 0x2000000;
+        public const int OnboardWorkRamEnd = 0x203FFFF;
         public MemoryRegion OnboardWorkRam = new MemoryRegion(OnboardWorkRamStart, OnboardWorkRamEnd);
 
-        public const uint InChipWorkRamStart = 0x3000000u;
-        public const uint InChipWorkRamEnd = 0x3007FFFu;
+        public const int InChipWorkRamStart = 0x3000000;
+        public const int InChipWorkRamEnd = 0x3007FFF;
         public MemoryRegion InChipWorkRam = new MemoryRegion(InChipWorkRamStart, InChipWorkRamEnd);
 
-        public const uint IORegistersStart = 0x4000000u;
-        public const uint IORegistersEnd = 0x40003FEu;
+        public const int IORegistersStart = 0x4000000;
+        public const int IORegistersEnd = 0x40003FE;
         public MemoryRegion IORegisters = new MemoryRegion(IORegistersStart, IORegistersEnd);
 
         public InternalMemory()

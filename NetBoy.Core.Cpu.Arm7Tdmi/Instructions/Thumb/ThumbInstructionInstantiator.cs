@@ -43,7 +43,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
                 new MoveNegatedInstruction(),
             };
 
-            public override bool Execute(ExecutionCore executionCore, uint opcode)
+            public override bool Execute(ExecutionCore executionCore, ushort opcode)
             {
                 var op = (opcode & 0x3C0u) >> 6;
                 return this.Instructions[op].Execute(executionCore, opcode);

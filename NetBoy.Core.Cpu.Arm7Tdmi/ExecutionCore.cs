@@ -103,22 +103,35 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="registerNumber"></param>
+        /// <returns></returns>
+        public Register R(int registerNumber)
+        {
+            return this.baseRegisters[this.modeToRegister[this.currentMode * 16 + registerNumber]];
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="opcode"></param>
         public bool Execute(uint opcode)
         {
-            if (this.CurrentProgramStatusRegister.ThumbMode)
+            var thumbOpcode = (ushort)opcode;
+            var armOpcode = opcode;
+
+            if (!this.CurrentProgramStatusRegister.ThumbMode)
             {
-                var high = (opcode & 0xF000u) >> 12;
-                var low  = (opcode & 0x0F00u) >>  8;
-                Console.WriteLine("0x" + this.PC.Value.ToString("X") + "> (0x" + opcode.ToString("X") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(opcode));
-                return this.thumbInstructionInstantiator.Instructions[high][low].Execute(this, opcode);
+                var high = (thumbOpcode & 0xF000u) >> 12;
+                var low = (thumbOpcode & 0x0F00u) >> 8;
+                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(thumbOpcode));
+                return this.thumbInstructionInstantiator.Instructions[high][low].Execute(this, thumbOpcode);
             }
             else
             {
-                var high = (opcode & 0xF0000000u) >> 28;
-                var low  = (opcode & 0x0F000000u) >> 24;
-                Console.WriteLine("0x" + this.PC.Value.ToString("X") + "> (0x" + opcode.ToString("X") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(opcode));
-                return this.armInstructionInstantiator.Instructions[high][low].Execute(this, opcode);
+                var high = (armOpcode & 0xF000000u) >> 24;
+                var low = (armOpcode & 0x0F00000u) >> 20;
+                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(armOpcode));
+                return this.armInstructionInstantiator.Instructions[high][low].Execute(this, armOpcode);
             }
 
             throw new NotSupportedException();
@@ -131,7 +144,13 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         {
             var pc = this.PC.Value;
             var region = this.memoryManager.GetMemoryRegionForAddress(pc);
-            var value = region.Read16(pc);
+
+            var value = 0u;
+
+            if (!this.CurrentProgramStatusRegister.ThumbMode)
+                value = region.Read16(pc);
+            else
+                value = region.Read32(pc);
 
             if (!this.Execute(value))
                 this.Step();

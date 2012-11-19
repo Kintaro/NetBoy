@@ -11,7 +11,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
     /// </summary>
     public sealed class MoveNegatedInstruction : ThumbInstruction
     {
-        public override bool Execute(ExecutionCore executionCore, uint opcode)
+        public override bool Execute(ExecutionCore executionCore, ushort opcode)
         {
             // Move negated source register into destination register
             var rd = opcode & 0x7u;
@@ -21,7 +21,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
             return false;
         }
 
-        public override string InstructionAsString(uint opcode)
+        public override string InstructionAsString(ushort opcode)
         {
             // Move negated source register into destination register
             var rd = opcode & 0x7u;

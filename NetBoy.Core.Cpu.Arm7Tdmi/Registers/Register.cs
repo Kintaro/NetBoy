@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NetBoy.Core.Cpu.Arm7Tdmi.Registers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Register
     {
         public uint Value;
