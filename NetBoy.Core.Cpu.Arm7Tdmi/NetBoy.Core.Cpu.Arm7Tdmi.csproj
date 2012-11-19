@@ -49,6 +49,7 @@
     <Compile Include="Instructions\Arm\Branch\BxInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\MoveInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\NopInstruction.cs" />
+    <Compile Include="Instructions\Arm\Logical\OrInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\TeqInstruction.cs" />
     <Compile Include="Instructions\Arm\Memory\LdrInstruction.cs" />
     <Compile Include="Instructions\Thumb\Branch\BxInstruction.cs" />

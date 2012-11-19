@@ -55,7 +55,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Arithmetic
                 ;
 
             if (immediate)
-                return string.Format("cmp{0} #{1}, {2}", ArmConditionDecoder.ToString(condition), rn, op2);
+                return string.Format("cmp{0} #{1}, 0x{2}", ArmConditionDecoder.ToString(condition), rn, op2);
             else
                 return string.Format("cmp{0} #{1}, #{2}", ArmConditionDecoder.ToString(condition), rn, op2);
         }

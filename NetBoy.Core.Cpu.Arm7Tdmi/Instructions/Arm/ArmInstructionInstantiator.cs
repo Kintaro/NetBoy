@@ -53,8 +53,8 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
                 new NopInstruction(),
                 new NopInstruction(),
                 // 1---
-                new NopInstruction(),
-                new NopInstruction(),
+                new OrInstruction(),
+                new OrInstruction(),
                 new MoveInstruction(),
                 new MoveInstruction(),
                 new NopInstruction(),
@@ -97,8 +97,8 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
                 new NopInstruction(),
                 new NopInstruction(),
                 // 1---
-                new NopInstruction(),
-                new NopInstruction(),
+                new OrInstruction(),
+                new OrInstruction(),
                 new MoveInstruction(),
                 new MoveInstruction(),
                 new NopInstruction(),
