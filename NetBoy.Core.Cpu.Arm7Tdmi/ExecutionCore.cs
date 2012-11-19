@@ -123,14 +123,24 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
             {
                 var high = (thumbOpcode & 0xF000u) >> 12;
                 var low = (thumbOpcode & 0x0F00u) >> 8;
-                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(thumbOpcode));
+                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X4") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(thumbOpcode) + " [{0}{1}{2}{3}]", 
+                    this.CurrentProgramStatusRegister.Signed ? "N" : " ",
+                    this.CurrentProgramStatusRegister.Zero ? "Z" : " ",
+                    this.CurrentProgramStatusRegister.Overflow ? "V" : " ",
+                    this.CurrentProgramStatusRegister.Carry ? "C" : " "
+                    );
                 return this.thumbInstructionInstantiator.Instructions[high][low].Execute(this, thumbOpcode);
             }
             else
             {
                 var high = (armOpcode & 0xF000000u) >> 24;
                 var low = (armOpcode & 0x0F00000u) >> 20;
-                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(armOpcode));
+                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X8") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(armOpcode) + " [{0}{1}{2}{3}]",
+                    this.CurrentProgramStatusRegister.Signed ? "N" : " ",
+                    this.CurrentProgramStatusRegister.Zero ? "Z" : " ",
+                    this.CurrentProgramStatusRegister.Overflow ? "V" : " ",
+                    this.CurrentProgramStatusRegister.Carry ? "C" : " "
+                    );
                 return this.armInstructionInstantiator.Instructions[high][low].Execute(this, armOpcode);
             }
 
@@ -161,7 +171,10 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         /// </summary>
         public void Step()
         {
-            this.PC.Value = this.PC.Value + 2;
+            if (!this.CurrentProgramStatusRegister.ThumbMode)
+                this.PC.Value = this.PC.Value + 2;
+            else
+                this.PC.Value = this.PC.Value + 4;
         }
 
         /// <summary>

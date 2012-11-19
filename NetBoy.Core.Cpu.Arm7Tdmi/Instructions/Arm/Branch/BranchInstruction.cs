@@ -17,9 +17,12 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Branch
             var nn = (uint)(opcode & 0xFFFFFFu);
 
             if (ArmConditionDecoder.CheckCondition(executionCore, condition))
+            {
                 executionCore.PC.Value = executionCore.PC.Value + 8 + nn * 4;
+                return true;
+            }
 
-            return true;
+            return false;
         }
 
         public override string InstructionAsString(uint opcode)
