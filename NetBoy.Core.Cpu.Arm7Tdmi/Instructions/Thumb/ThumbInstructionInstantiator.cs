@@ -24,7 +24,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
         /// </summary>
         private class AluInstructionInstantiator : ThumbInstruction
         {
-            // 010000----
+            // 0100.00----
             public ThumbInstruction[] Instructions = new ThumbInstruction[]
             {
                 new AndInstruction(),
@@ -35,7 +35,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
                 new NopInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
-                new NopInstruction(),
+                new TstInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
@@ -197,14 +197,14 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
             new ThumbInstruction[]
             {
                 // 0---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
                 // 1---
                 new LdrInstruction(),
                 new LdrInstruction(),
@@ -241,14 +241,14 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
             new ThumbInstruction[]
             {
                 // 0---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
                 // 1---
                 new NopInstruction(),
                 new NopInstruction(),

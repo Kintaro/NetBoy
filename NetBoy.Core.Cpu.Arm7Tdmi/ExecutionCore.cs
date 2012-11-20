@@ -212,8 +212,8 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         {
             while (true)
             {
-                if (this.PC.Value == 0x9CE)
-                    break;
+                if (this.PC.Value == 0xAAC)
+                    Console.WriteLine();
                 this.ExecuteCurrentInstruction();
                 //Console.ReadKey();
             }

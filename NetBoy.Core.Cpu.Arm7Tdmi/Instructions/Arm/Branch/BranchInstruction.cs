@@ -18,7 +18,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Branch
 
             if (ArmConditionDecoder.CheckCondition(executionCore, condition))
             {
-                executionCore.PC.Value = executionCore.PC.Value + 4 + nn * 4;
+                executionCore.PC.Value = executionCore.PC.Value + 8 + nn * 4;
                 return true;
             }
 

@@ -23,6 +23,21 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Memory
 
                 return false;
             }
+            else if ((opcode & 0xF000u) == 0x8000u)
+            {
+                var nn = (opcode & 0x7C0u) >> 6;
+                var rb = (opcode & 0x38u) >> 3;
+                var rd = opcode & 0x7u;
+
+                var address = ((uint)((int)executionCore.R(rb).Value + (int)nn));
+                executionCore.memoryManager.GetMemoryRegionForAddress(address).Write16(address, (ushort)executionCore.R(rd).Value);
+
+                return false;
+            }
+            else if ((opcode & 0xF800u) == 0x6000u)
+            {
+                return false;
+            }
             else
             {
                 var rd = opcode & 0x7u;
@@ -44,6 +59,14 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Memory
                 var nn = (opcode & 0xFFu) * 4;
 
                 return string.Format("str r{0}, [#sp, 0x{1:X}]", rd, nn);
+            }
+            else if ((opcode & 0xF000u) == 0x8000u)
+            {
+                var nn = (opcode & 0x7C0u) >> 6;
+                var rb = (opcode & 0x38u) >> 3;
+                var rd = opcode & 0x7u;
+
+                return string.Format("strh r{0}, [r{1}, 0x{2:X}]", rd, rb, nn);
             }
             else
             {

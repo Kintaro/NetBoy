@@ -20,7 +20,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Branch
             
             if (ThumbConditionDecoder.CheckCondition(executionCore, condition))
             {
-                executionCore.PC.Value = (uint)(executionCore.PC.Value + offset);
+                executionCore.PC.Value = (uint)(executionCore.PC.Value + 4 + offset * 2);
                 return true;
             }
 
