@@ -137,5 +137,21 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
                 default: throw new NotSupportedException();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static int BitCount(uint n)
+        {
+            var ret = 0;
+            while (n != 0)
+            {
+                n &= (n - 1);
+                ret++;
+            }
+            return ret;
+        }
     }
 }

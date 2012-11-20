@@ -61,9 +61,9 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Logical
                 ;
 
             if (immediate)
-                return string.Format("teq{0} #{1}, 0x{2:X}", ArmConditionDecoder.ToString(condition), rn, op2);
+                return string.Format("teq{0} r{1}, 0x{2:X}", ArmConditionDecoder.ToString(condition), rn, op2);
             else
-                return string.Format("teq{0} #{1}, #{2}", ArmConditionDecoder.ToString(condition), rn, op2);
+                return string.Format("teq{0} r{1}, r{2}", ArmConditionDecoder.ToString(condition), rn, op2);
         }
     }
 }

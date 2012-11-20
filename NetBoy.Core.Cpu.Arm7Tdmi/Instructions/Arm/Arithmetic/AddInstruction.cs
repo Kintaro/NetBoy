@@ -71,7 +71,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Arithmetic
             else
                 ;
 
-            return string.Format("add{0} #{1}, #{2}, 0x{3:X}", ArmConditionDecoder.ToString(condition), rd, rn, op2);
+            return string.Format("add{0} r{1}, r{2}, 0x{3:X}", ArmConditionDecoder.ToString(condition), rd, rn, op2);
         }
     }
 }

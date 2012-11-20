@@ -64,8 +64,6 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.PsrTransfer
                     if (x) reg.Value = (reg.Value & 0xFFFF00FFu) | (op & 0x0000FF00u);
                     if (c) reg.Value = (reg.Value & 0xFFFFFF00u) | (op & 0x000000FFu);
                 }
-                if (!immediate && ((opcode & 0xFu) != 13))
-                    executionCore.R(13).Value = 0x0u;
             }
 
             return false;
@@ -100,9 +98,9 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.PsrTransfer
             }
 
             if (immediate)
-                return string.Format("msr{0} #{1}, {2}", ArmConditionDecoder.ToString(condition), cpsr ? "cpsr" : "spsr", op);
+                return string.Format("msr{0} r{1}, {2}", ArmConditionDecoder.ToString(condition), cpsr ? "cpsr" : "spsr", op);
             else
-                return string.Format("msr{0} #{1}, #{2}", ArmConditionDecoder.ToString(condition), cpsr ? "cpsr" : "spsr", op);
+                return string.Format("msr{0} r{1}, r{2}", ArmConditionDecoder.ToString(condition), cpsr ? "cpsr" : "spsr", op);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Memory
                 offset = offset * 4;
             }
 
-            return string.Format("ldr #{0}, [#{1}, 0x{2:X}]", rd, (opcode & 0x4800u) == 0x4800u ? "pc" : rb.ToString(), offset);
+            return string.Format("ldr r{0}, [r{1}, 0x{2:X}]", rd, (opcode & 0x4800u) == 0x4800u ? "pc" : rb.ToString(), offset);
         }
     }
 }

@@ -67,7 +67,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Registers
         public bool ArmMode
         {
             get { return !this.IsFlagSet(StateFlag); }
-            set { this.SetFlag(SignedFlag, !value); }
+            set { this.SetFlag(StateFlag, !value); }
         }
 
         public bool ThumbMode

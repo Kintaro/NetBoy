@@ -35,7 +35,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.PsrTransfer
             var cpsr = (opcode & 0x400000u) == 0;
             var rd = (opcode & 0xF000u) >> 16;
 
-            return string.Format("mrs{0} #{2}, #{1}", ArmConditionDecoder.ToString(condition), cpsr ? "cpsr" : "spsr", rd);
+            return string.Format("mrs{0} r{2}, r{1}", ArmConditionDecoder.ToString(condition), cpsr ? "cpsr" : "spsr", rd);
         }
     }
 }

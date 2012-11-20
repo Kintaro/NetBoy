@@ -61,6 +61,7 @@
     <Compile Include="Instructions\Thumb\Branch\BxInstruction.cs" />
     <Compile Include="Instructions\Thumb\Arithmetic\AddInstruction.cs" />
     <Compile Include="Instructions\Thumb\Arithmetic\SubInstruction.cs" />
+    <Compile Include="Instructions\Thumb\Branch\LongBranchInstruction.cs" />
     <Compile Include="Instructions\Thumb\Logical\AndInstruction.cs" />
     <Compile Include="Instructions\Thumb\Logical\ArithmeticShiftRightInstruction.cs" />
     <Compile Include="Instructions\Thumb\Logical\LogicalShiftLeftInstruction.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Instructions\Thumb\Logical\OrInstruction.cs" />
     <Compile Include="Instructions\Thumb\Logical\TstInstruction.cs" />
     <Compile Include="Instructions\Thumb\Memory\LdrInstruction.cs" />
+    <Compile Include="Instructions\Thumb\Memory\PushInstruction.cs" />
     <Compile Include="Instructions\Thumb\Memory\StrInstruction.cs" />
     <Compile Include="Instructions\Thumb\ThumbCondition.cs" />
     <Compile Include="Instructions\Thumb\ThumbInstruction.cs" />

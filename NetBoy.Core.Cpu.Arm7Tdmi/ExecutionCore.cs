@@ -22,6 +22,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         private const int AbortMode = 3;
         private const int IrqMode = 4;
         private const int UndefinedMode = 5;
+        private const int UserMode = 0;
 
         /// <summary>
         /// 
@@ -37,7 +38,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
                 var mode = this.CurrentProgramStatusRegister.Value & 0xFu;
                 switch (mode)
                 {
-                    case 0: return SystemMode;
+                    case 0: return UserMode;
                     case 1: return FiqMode;
                     case 2: return IrqMode;
                     case 3: return SupervisorMode;
@@ -140,7 +141,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
             {
                 var high = (thumbOpcode & 0xF000u) >> 12;
                 var low = (thumbOpcode & 0x0F00u) >> 8;
-                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X4") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(thumbOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}] {7:X}", 
+                Console.WriteLine("[{7,-10}] 0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X4") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(thumbOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}]", 
                     this.CurrentProgramStatusRegister.Signed ? "N" : " ",
                     this.CurrentProgramStatusRegister.Zero ? "Z" : " ",
                     this.CurrentProgramStatusRegister.Overflow ? "V" : " ",
@@ -148,7 +149,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
                     this.CurrentProgramStatusRegister.ThumbMode ? "T" : " ",
                     this.CurrentProgramStatusRegister.IrqDisable ? "I" : " ",
                     this.CurrentProgramStatusRegister.FiqDisable ? "F" : " ",
-                    this.R(14).Value
+                    this.ModeAsString
                     );
 
                 return this.thumbInstructionInstantiator.Instructions[high][low].Execute(this, thumbOpcode);
@@ -157,7 +158,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
             {
                 var high = (armOpcode & 0xF000000u) >> 24;
                 var low = (armOpcode & 0x0F00000u) >> 20;
-                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X8") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(armOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}] {7:X}",
+                Console.WriteLine("[{7,-10}] 0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X8") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(armOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}]",
                     this.CurrentProgramStatusRegister.Signed ? "N" : " ",
                     this.CurrentProgramStatusRegister.Zero ? "Z" : " ",
                     this.CurrentProgramStatusRegister.Overflow ? "V" : " ",
@@ -165,7 +166,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
                     this.CurrentProgramStatusRegister.ThumbMode ? "T" : " ",
                     this.CurrentProgramStatusRegister.IrqDisable ? "I" : " ",
                     this.CurrentProgramStatusRegister.FiqDisable ? "F" : " ",
-                    this.R(14).Value
+                    this.ModeAsString
                     );
 
                 return this.armInstructionInstantiator.Instructions[high][low].Execute(this, armOpcode);
@@ -223,6 +224,28 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         public void JumpToAddress(uint p)
         {
             this.PC.Value = p;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ModeAsString
+        {
+            get
+            {
+                var mode = this.CurrentProgramStatusRegister.Value & 0xFu;
+                switch (mode)
+                {
+                    case  0: return "User";
+                    case  1: return "Fiq";
+                    case  2: return "Irq";
+                    case  3: return "Supervisor";
+                    case  7: return "Abort";
+                    case 11: return "Undefined";
+                    case 15: return "System";
+                }
+                throw new NotSupportedException();
+            }
         }
     }
 }

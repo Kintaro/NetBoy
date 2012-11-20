@@ -16,25 +16,27 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
             // Move an immediate value into the destination register
             if ((opcode & 0x2000u) == 0x2000u)
             {
-                short rd = (short)((opcode & 0x700u) >> 8);
-                short imm = (short)(opcode & 0xFFu);
+                var rd = ((opcode & 0x700u) >> 8);
+                var imm = (opcode & 0xFFu);
 
-                executionCore.R(rd).Value = (uint)imm;
+                executionCore.R(rd).Value = imm;
+                executionCore.CurrentProgramStatusRegister.Zero = imm == 0;
             }
             // Move source register into destination register
             else if ((opcode & 0x400u) == 0x400u)
             {
-                short rd = (short)(opcode & 0x7u);
-                short rs = (short)((opcode & 0x38u) >> 3);
+                var rd = (opcode & 0x7u);
+                var rs = ((opcode & 0x38u) >> 3);
 
                 executionCore.R(rd).Value = executionCore.R(rs).Value;
+                executionCore.CurrentProgramStatusRegister.Zero = executionCore.R(rd).Value == 0;
             }
             // Move source register into destination register
             // and reset the carry and overflow flags
             else if ((opcode & 0x1800u) == 0x1800u)
             {
-                short rd = (short)(opcode & 0x7u);
-                short rs = (short)((opcode & 0x38u) >> 3);
+                var rd = (opcode & 0x7u);
+                var rs = ((opcode & 0x38u) >> 3);
 
                 executionCore.R(rd).Value = executionCore.R(rs).Value;
                 executionCore.CurrentProgramStatusRegister.Carry = false;
@@ -52,7 +54,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
                 var rd = (opcode & 0x700u) >> 8;
                 var imm = opcode & 0xFFu;
 
-                return "mov #" + rd + ", " + imm;
+                return string.Format("mov r{0}, 0x{1:X}", rd, imm);
             }
             // Move source register into destination register
             else if ((opcode & 0x400u) == 0x400u)

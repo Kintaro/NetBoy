@@ -57,7 +57,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Logical
             else
                 ;
 
-            return string.Format("orr{0} #{1}, #{2}, 0x{3:X}", ArmConditionDecoder.ToString(condition), rd, rn, op2);
+            return string.Format("orr{0} r{1}, r{2}, 0x{3:X}", ArmConditionDecoder.ToString(condition), rd, rn, op2);
         }
     }
 }

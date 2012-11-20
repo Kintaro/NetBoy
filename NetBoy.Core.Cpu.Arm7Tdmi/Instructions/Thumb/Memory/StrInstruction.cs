@@ -13,23 +13,46 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Memory
     {
         public override bool Execute(ExecutionCore executionCore, ushort opcode)
         {
-            var rd = opcode & 0x7u;
-            var rb = (opcode & 0x38u) >> 3;
-            var ro = (opcode & 0x1C0u) >> 6;
+            if ((opcode & 0xF000u) == 0x9000u)
+            {
+                var rd = (opcode & 0x700u) >> 8;
+                var nn = (opcode & 0xFFu) * 4;
 
-            var address = (uint)((int)executionCore.R(rb).Value + (int)executionCore.R(ro).Value);
-            executionCore.memoryManager.GetMemoryRegionForAddress(address).Write32(address, executionCore.R(rd).Value);
+                var address = ((uint)((int)executionCore.R(13).Value + (int)nn));
+                executionCore.memoryManager.GetMemoryRegionForAddress(address).Write32(address, executionCore.R(rd).Value);
 
-            return false;
+                return false;
+            }
+            else
+            {
+                var rd = opcode & 0x7u;
+                var rb = (opcode & 0x38u) >> 3;
+                var ro = (opcode & 0x1C0u) >> 6;
+
+                var address = (uint)((int)executionCore.R(rb).Value + (int)executionCore.R(ro).Value);
+                executionCore.memoryManager.GetMemoryRegionForAddress(address).Write32(address, executionCore.R(rd).Value);
+
+                return false;
+            }
         }
 
         public override string InstructionAsString(ushort opcode)
         {
-            var rd = opcode & 0x7u;
-            var rb = (opcode & 0x38u) >> 3;
-            var ro = (opcode & 0x1C0u) >> 6;
+            if ((opcode & 0xF000u) == 0x9000u)
+            {
+                var rd = (opcode & 0x700u) >> 8;
+                var nn = (opcode & 0xFFu) * 4;
 
-            return string.Format("str #{0}, [#{1}, #{2}]", rd, (opcode & 0x4800u) == 0x4800u ? "pc" : rb.ToString(), ro);
+                return string.Format("str r{0}, [#sp, 0x{1:X}]", rd, nn);
+            }
+            else
+            {
+                var rd = opcode & 0x7u;
+                var rb = (opcode & 0x38u) >> 3;
+                var ro = (opcode & 0x1C0u) >> 6;
+
+                return string.Format("str r{0}, [r{1}, r{2}]", rd, (opcode & 0x4800u) == 0x4800u ? "pc" : rb.ToString(), ro);
+            }
         }
     }
 }

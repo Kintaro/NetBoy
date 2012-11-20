@@ -21,38 +21,39 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic
 
                 var op = (opcode & 0x600u) >> 9;
 
-                short rsV = (short)executionCore.R(rs).Value;
-                short rnV = (short)executionCore.R(rn).Value;
-                short r = 0;
-
-                try
-                {
-                    r = checked((short)(rsV + rnV));
-                }
-                catch (OverflowException)
-                {
-                    executionCore.CurrentProgramStatusRegister.Overflow = true;
-                }
+                var rsV = executionCore.R(rs).Value;
+                var rnV = executionCore.R(rn).Value;
+                var r = 0;
 
                 if (op == 0)
                     executionCore.R(rd).Value = (uint)r;
                 else if (op == 2)
-                    executionCore.R(rd).Value = (uint)((short)rsV + (short)rn);
+                    executionCore.R(rd).Value = (uint)(rsV + rn);
 
                 if (op == 0)
                 {
-                    executionCore.CurrentProgramStatusRegister.Signed = (((ushort)(int)(rsV + (int)rnV)) & 0x8000u) != 0;
-                    executionCore.CurrentProgramStatusRegister.Zero = ((ushort)((int)rsV + (int)rnV)) == 0;
-                    executionCore.CurrentProgramStatusRegister.Overflow = ((uint)((int)rsV + (int)rnV)) > short.MaxValue;
+                    var opA = (long)rsV & 0xFFFFFFFF;
+                    var opB = (long)rnV & 0xFFFFFFFF;
+                    var result = (ulong)(opA + opB);
+                    var signedResult = rsV + rnV;
+
+                    executionCore.CurrentProgramStatusRegister.Signed = (signedResult & 0x80000000u) == 0x80000000u;
+                    executionCore.CurrentProgramStatusRegister.Zero = signedResult == 0;
+                    //executionCore.CurrentProgramStatusRegister.Overflow = result > uint.MaxValue;
+                    executionCore.CurrentProgramStatusRegister.Carry = (result & 0x100000000u) == 0x100000000u;
                 }
                 else if (op == 2)
                 {
-                    short a = (short)rsV;
-                    short b = (short)rn;
-                    var result = (uint)a + b;
-                    executionCore.CurrentProgramStatusRegister.Signed = (((ushort)((int)rsV + (int)rn)) & 0x8000u) != 0;
-                    executionCore.CurrentProgramStatusRegister.Zero = ((ushort)((int)rsV + (int)rn)) == 0;      
-                    executionCore.CurrentProgramStatusRegister.Overflow = ((uint)((short)rsV + (short)rn)) > uint.MaxValue;
+                    var opA = (long)rsV & 0xFFFFFFFF;
+                    var opB = (long)rn & 0xFFFFFFFF;
+                    var result = (ulong)(opA + opB);
+                    var signedResult = rsV + rn;
+                    var signedLongResult = opA + opB;
+
+                    executionCore.CurrentProgramStatusRegister.Signed = (signedResult & 0x80000000u) == 0x80000000u;
+                    executionCore.CurrentProgramStatusRegister.Zero = signedResult == 0;
+                    //executionCore.CurrentProgramStatusRegister.Overflow = signedLongResult > uint.MaxValue;
+                    executionCore.CurrentProgramStatusRegister.Carry = (result & 0x100000000u) == 0x100000000u;
                 }       
             }
             else if ((opcode & 0xF800u) >> 11 == 6)
@@ -60,20 +61,30 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic
                 var rd = (opcode & 0x700u) >> 8;
                 var nn = opcode & 0xFFu;
 
-                var rdV = (short)executionCore.R(rd).Value;
-                var rnV = (short)nn;
-                short r = 0;
+                var rdV = executionCore.R(rd).Value;
+                var rnV = nn;
 
-                try
-                {
-                    r = checked((short)(rdV + rnV));
-                }
-                catch (OverflowException)
-                {
-                    executionCore.CurrentProgramStatusRegister.Overflow = true;
-                }
+                var opA = (long)rdV & 0xFFFFFFFF;
+                var opB = (long)rnV & 0xFFFFFFFF;
+                var result = (ulong)(opA + opB);
+                var signedResult = rdV + rnV;
 
-                executionCore.R(rd).Value = (uint)r;
+                executionCore.CurrentProgramStatusRegister.Signed = (signedResult & 0x80000000u) == 0x80000000u;
+                executionCore.CurrentProgramStatusRegister.Zero = signedResult == 0;
+                executionCore.CurrentProgramStatusRegister.Overflow = result > uint.MaxValue;
+                executionCore.CurrentProgramStatusRegister.Carry = (result & 0x100000000u) == 0x100000000u;
+
+                executionCore.R(rd).Value = signedResult;
+            }
+            else if ((opcode & 0xFF00u) == 0xB000u)
+            {
+                var positive = (opcode & 0x80u) == 0;
+                var nn = (opcode & 0x7Fu) * 4;
+
+                if (positive)
+                    executionCore.R(13).Value = executionCore.R(13).Value + nn;
+                else
+                    executionCore.R(13).Value = executionCore.R(13).Value - nn;
             }
             return false;
         }
@@ -99,6 +110,16 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic
                 var nn = opcode & 0xFFu;
 
                 return "add #" + rd + ", " + nn;
+            }
+            else if ((opcode & 0xFF00u) == 0xB000u)
+            {
+                var positive = (opcode & 0x80u) == 0;
+                var nn = (opcode & 0x7Fu) * 4;
+
+                if (positive)
+                    return string.Format("add #sp, 0x{0:x}", nn);
+                else
+                    return string.Format("add #sp, -0x{0:x}", nn);
             }
 
             throw new NotSupportedException();

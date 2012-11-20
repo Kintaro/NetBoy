@@ -35,7 +35,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Memory
             var rd = (opcode & 0x0F000u) >> 12;
             var offset = opcode & 0xFFFu;
 
-            return string.Format("str{0} #{1}, [#{2}, 0x{3:X}]", ArmConditionDecoder.ToString(condition), rd, rn, offset);
+            return string.Format("str{0} r{1}, [r{2}, 0x{3:X}]", ArmConditionDecoder.ToString(condition), rd, rn, offset);
         }
     }
 }

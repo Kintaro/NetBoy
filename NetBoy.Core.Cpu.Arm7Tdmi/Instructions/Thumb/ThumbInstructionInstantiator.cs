@@ -50,6 +50,12 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
                 var op = (opcode & 0x3C0u) >> 6;
                 return this.Instructions[op].Execute(executionCore, opcode);
             }
+
+            public override string InstructionAsString(ushort opcode)
+            {
+                var op = (opcode & 0x3C0u) >> 6;
+                return this.Instructions[op].InstructionAsString(opcode);
+            }
         }
 
         public ThumbInstruction[][] Instructions = new ThumbInstruction[][]
@@ -257,14 +263,14 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
             new ThumbInstruction[]
             {
                 // 0---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
                 // 1---
                 new NopInstruction(),
                 new NopInstruction(),
@@ -301,12 +307,12 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
             new ThumbInstruction[]
             {
                 // 0---
+                new AddInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new PushInstruction(),
+                new PushInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
                 // 1---
@@ -376,36 +382,36 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
                 new NopInstruction(),
                 new NopInstruction(),
                 // 1---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
             },
             // 1111
             new ThumbInstruction[]
             {
                 // 0---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
                 // 1---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
+                new LongBranchInstruction(),
             },
         };
     }
