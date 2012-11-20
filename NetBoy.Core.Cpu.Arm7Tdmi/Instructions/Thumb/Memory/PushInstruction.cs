@@ -38,23 +38,16 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Memory
             var registerList = opcode & 0xFFu;
             var pclr = ((opcode & 0x100u) >> 8) == 1;
 
-            var smallestRegister = 0;
-            var highestRegister = 0;
+            var smallestRegister = -1;
+            var highestRegister = -1;
 
             for (var i = 0; i < 8; ++i)
             {
                 if ((registerList & (1u << i)) != (1u << i))
                     continue;
-                smallestRegister = i;
-                break;
-            }
-
-            for (var i = 7; i >= 0; --i)
-            {
-                if ((registerList & (1u << i)) != (1u << i))
-                    continue;
+                if (smallestRegister < 0)
+                    smallestRegister = i;
                 highestRegister = i;
-                break;
             }
 
             var registerCount = BitHelper.BitCount(registerList);
