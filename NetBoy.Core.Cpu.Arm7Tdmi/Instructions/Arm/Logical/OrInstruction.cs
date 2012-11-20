@@ -51,7 +51,8 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Logical
             if (immediate)
             {
                 var nn = opcode & 0xFFu;
-                op2 = BitHelper.Ror(nn, shift * 2);
+                var type = (opcode & 0x60u) >> 0x5;
+                op2 = BitHelper.ShiftByType(nn, shift * 2, type);
             }
             else
                 ;

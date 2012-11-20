@@ -30,7 +30,25 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         /// <summary>
         /// 
         /// </summary>
-        private int currentMode = 0;
+        internal int currentMode
+        {
+            get
+            {
+                var mode = this.CurrentProgramStatusRegister.Value & 0xFu;
+                switch (mode)
+                {
+                    case 0: return SystemMode;
+                    case 1: return FiqMode;
+                    case 2: return IrqMode;
+                    case 3: return SupervisorMode;
+                    case 7: return AbortMode;
+                    case 11: return UndefinedMode;
+                    case 15: return SystemMode;
+                }
+
+                throw new NotSupportedException();
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -75,7 +93,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         /// <summary>
         /// 
         /// </summary>
-        public Register PC { get { return this.baseRegisters[this.modeToRegister[SystemMode * 16 + 15]]; } }
+        public Register PC { get { return this.baseRegisters[this.modeToRegister[currentMode * 16 + 15]]; } }
 
         /// <summary>
         /// 
@@ -87,7 +105,6 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
             for (var i = 0; i < 6; ++i)
                 this.SavedProgramStatusRegister[i] = new SavedProgramStatusRegister();
             this.memoryManager = memoryManager;
-            this.CurrentProgramStatusRegister.ThumbMode = true;
         }
 
         /// <summary>
@@ -119,28 +136,38 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
             var thumbOpcode = (ushort)opcode;
             var armOpcode = opcode;
 
-            if (!this.CurrentProgramStatusRegister.ThumbMode)
+            if (this.CurrentProgramStatusRegister.ThumbMode)
             {
                 var high = (thumbOpcode & 0xF000u) >> 12;
                 var low = (thumbOpcode & 0x0F00u) >> 8;
-                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X4") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(thumbOpcode) + " [{0}{1}{2}{3}]", 
+                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X4") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(thumbOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}] {7:X}", 
                     this.CurrentProgramStatusRegister.Signed ? "N" : " ",
                     this.CurrentProgramStatusRegister.Zero ? "Z" : " ",
                     this.CurrentProgramStatusRegister.Overflow ? "V" : " ",
-                    this.CurrentProgramStatusRegister.Carry ? "C" : " "
+                    this.CurrentProgramStatusRegister.Carry ? "C" : " ",
+                    this.CurrentProgramStatusRegister.ThumbMode ? "T" : " ",
+                    this.CurrentProgramStatusRegister.IrqDisable ? "I" : " ",
+                    this.CurrentProgramStatusRegister.FiqDisable ? "F" : " ",
+                    this.R(14).Value
                     );
+
                 return this.thumbInstructionInstantiator.Instructions[high][low].Execute(this, thumbOpcode);
             }
             else
             {
                 var high = (armOpcode & 0xF000000u) >> 24;
                 var low = (armOpcode & 0x0F00000u) >> 20;
-                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X8") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(armOpcode) + " [{0}{1}{2}{3}]",
+                Console.WriteLine("0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X8") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(armOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}] {7:X}",
                     this.CurrentProgramStatusRegister.Signed ? "N" : " ",
                     this.CurrentProgramStatusRegister.Zero ? "Z" : " ",
                     this.CurrentProgramStatusRegister.Overflow ? "V" : " ",
-                    this.CurrentProgramStatusRegister.Carry ? "C" : " "
+                    this.CurrentProgramStatusRegister.Carry ? "C" : " ",
+                    this.CurrentProgramStatusRegister.ThumbMode ? "T" : " ",
+                    this.CurrentProgramStatusRegister.IrqDisable ? "I" : " ",
+                    this.CurrentProgramStatusRegister.FiqDisable ? "F" : " ",
+                    this.R(14).Value
                     );
+
                 return this.armInstructionInstantiator.Instructions[high][low].Execute(this, armOpcode);
             }
 
@@ -157,13 +184,13 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
 
             var value = 0u;
 
-            if (!this.CurrentProgramStatusRegister.ThumbMode)
+            if (this.CurrentProgramStatusRegister.ThumbMode)
                 value = region.Read16(pc);
             else
                 value = region.Read32(pc);
 
             if (!this.Execute(value))
-                this.Step();
+                Step();
         }
 
         /// <summary>
@@ -171,7 +198,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         /// </summary>
         public void Step()
         {
-            if (!this.CurrentProgramStatusRegister.ThumbMode)
+            if (this.CurrentProgramStatusRegister.ThumbMode)
                 this.PC.Value = this.PC.Value + 2;
             else
                 this.PC.Value = this.PC.Value + 4;
@@ -185,7 +212,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
             while (true)
             {
                 this.ExecuteCurrentInstruction();
-                Console.ReadKey();
+                //Console.ReadKey();
             }
         }
 

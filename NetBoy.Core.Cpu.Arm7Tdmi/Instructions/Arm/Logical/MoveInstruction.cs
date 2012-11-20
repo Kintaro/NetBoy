@@ -20,17 +20,26 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Logical
 
             var op2 = 0u;
 
+            var carry = false;
             if (immediate)
             {
                 var nn = opcode & 0xFFu;
                 op2 = BitHelper.Ror(nn, shift * 2);
+                carry = BitHelper.CarryRor(nn, shift * 2);
             }
             else
                 ;
 
+            var s = (opcode & 0x100000u) != 0;
+
             executionCore.R(rn).Value = op2;
-            executionCore.CurrentProgramStatusRegister.Zero = op2 != 0;
-            executionCore.CurrentProgramStatusRegister.Signed = (op2 & 0x80000000u) != 0;
+
+            if (s)
+            {
+                executionCore.CurrentProgramStatusRegister.Carry = !carry;
+                executionCore.CurrentProgramStatusRegister.Zero = op2 != 0;
+                executionCore.CurrentProgramStatusRegister.Signed = (op2 & 0x80000000u) != 0;
+            }
 
             return false;
         }

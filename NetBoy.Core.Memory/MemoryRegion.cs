@@ -138,5 +138,15 @@ namespace NetBoy.Core.Memory
         {
             this.memory = p;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="p"></param>
+        public void SetMemory(int start, byte[] p)
+        {
+            p.CopyTo(this.memory, start);
+        }
     }
 }

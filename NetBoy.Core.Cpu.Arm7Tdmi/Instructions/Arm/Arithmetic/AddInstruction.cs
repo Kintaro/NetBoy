@@ -4,20 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Logical
+namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Arithmetic
 {
     /// <summary>
     /// 
     /// </summary>
-    public sealed class TeqInstruction : ArmInstruction
+    public sealed class AddInstruction : ArmInstruction
     {
         public override bool Execute(ExecutionCore executionCore, uint opcode)
         {
             var condition = ArmConditionDecoder.Decode(opcode);
-
             var rn = (opcode & 0xF0000u) >> 16;
-            var rnV = executionCore.R(rn).Value;
-
+            var rd = (opcode & 0x0F000u) >> 12;
             var immediate = (opcode & 0x2000000u) != 0;
             var shift = (opcode & 0xF00u) >> 8;
 
@@ -32,12 +30,24 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Logical
                 carry = BitHelper.CarryByType(nn, shift * 2, type);
             }
             else
-                ;
+            {
 
-            var temp = rnV ^ op2;
-            executionCore.CurrentProgramStatusRegister.Zero = temp == 0;
-            executionCore.CurrentProgramStatusRegister.Carry = carry;
-            executionCore.CurrentProgramStatusRegister.Signed = (temp & 0x80000000u) != 0;
+            }
+
+            var s = (opcode & 0x100000u) != 0;
+
+            if (ArmConditionDecoder.CheckCondition(executionCore, condition))
+            {
+                if (rn == 15)
+                    executionCore.R(rd).Value = (uint)((int)executionCore.R(rn).Value + 8 + (int)op2);
+                else
+                    executionCore.R(rd).Value = (uint)((int)executionCore.R(rn).Value + (int)op2);
+
+                if (s)
+                {
+                    executionCore.CurrentProgramStatusRegister.Carry = carry;
+                }
+            }
 
             return false;
         }
@@ -46,6 +56,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Logical
         {
             var condition = ArmConditionDecoder.Decode(opcode);
             var rn = (opcode & 0xF0000u) >> 16;
+            var rd = (opcode & 0x0F000u) >> 12;
             var immediate = (opcode & 0x2000000u) != 0;
             var shift = (opcode & 0xF00u) >> 8;
 
@@ -60,10 +71,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Logical
             else
                 ;
 
-            if (immediate)
-                return string.Format("teq{0} #{1}, 0x{2:X}", ArmConditionDecoder.ToString(condition), rn, op2);
-            else
-                return string.Format("teq{0} #{1}, #{2}", ArmConditionDecoder.ToString(condition), rn, op2);
+            return string.Format("add{0} #{1}, #{2}, 0x{3:X}", ArmConditionDecoder.ToString(condition), rd, rn, op2);
         }
     }
 }

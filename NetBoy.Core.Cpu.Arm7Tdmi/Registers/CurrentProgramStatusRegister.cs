@@ -18,9 +18,9 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Registers
         public const uint CarryFlag = 0x20000000;
         public const uint OverflowFlag = 0x10000000;
         public const uint StickyOverflowFlag = 0x8000000;
-        public const uint IrqDisableFlag = 0x40;
-        public const uint FiqDisableFlag = 0x20;
-        public const uint StateFlag = 0x10;
+        public const uint IrqDisableFlag = 0x80;
+        public const uint FiqDisableFlag = 0x40;
+        public const uint StateFlag = 0x20;
 
         public bool Signed
         {
@@ -100,6 +100,14 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Registers
         private void SetFlag(uint flag, bool value)
         {
             this.Value = value ? this.Value | flag : this.Value & ~flag;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public CurrentProgramStatusRegister()
+        {
+            this.ThumbMode = false;
         }
     }
 }

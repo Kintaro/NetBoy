@@ -37,7 +37,23 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic
                 if (op == 0)
                     executionCore.R(rd).Value = (uint)r;
                 else if (op == 2)
-                    executionCore.R(rd).Value = (uint)(rsV + (short)rn);
+                    executionCore.R(rd).Value = (uint)((short)rsV + (short)rn);
+
+                if (op == 0)
+                {
+                    executionCore.CurrentProgramStatusRegister.Signed = (((ushort)(int)(rsV + (int)rnV)) & 0x8000u) != 0;
+                    executionCore.CurrentProgramStatusRegister.Zero = ((ushort)((int)rsV + (int)rnV)) == 0;
+                    executionCore.CurrentProgramStatusRegister.Overflow = ((uint)((int)rsV + (int)rnV)) > short.MaxValue;
+                }
+                else if (op == 2)
+                {
+                    short a = (short)rsV;
+                    short b = (short)rn;
+                    var result = (uint)a + b;
+                    executionCore.CurrentProgramStatusRegister.Signed = (((ushort)((int)rsV + (int)rn)) & 0x8000u) != 0;
+                    executionCore.CurrentProgramStatusRegister.Zero = ((ushort)((int)rsV + (int)rn)) == 0;      
+                    executionCore.CurrentProgramStatusRegister.Overflow = ((uint)((short)rsV + (short)rn)) > uint.MaxValue;
+                }       
             }
             else if ((opcode & 0xF800u) >> 11 == 6)
             {

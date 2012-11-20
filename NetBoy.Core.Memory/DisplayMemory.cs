@@ -29,6 +29,9 @@ namespace NetBoy.Core.Memory
         public DisplayMemory()
             : base(DisplayMemoryStart, DisplayMemoryEnd)
         {
+            this.ObjPalette.Allocate();
+            this.Vram.Allocate();
+            this.ObjAttributes.Allocate();
         }
 
         public override MemoryRegion GetMemoryRegionForAddress(uint address)

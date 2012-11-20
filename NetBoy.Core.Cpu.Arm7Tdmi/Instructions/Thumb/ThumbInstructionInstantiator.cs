@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical;
 using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic;
+using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Memory;
+using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Branch;
 
 namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
 {
@@ -152,23 +154,23 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
                 new NopInstruction(),
                 new NopInstruction(),
                 new MoveInstruction(),
-                new NopInstruction(),
+                new BxInstruction(),
                 // 1---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
             },
             // 0101
             new ThumbInstruction[]
             {
                 // 0---
-                new NopInstruction(),
-                new NopInstruction(),
+                new StrInstruction(),
+                new StrInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
@@ -198,14 +200,14 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
                 new NopInstruction(),
                 new NopInstruction(),
                 // 1---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
+                new LdrInstruction(),
             },
             // 0111
             new ThumbInstruction[]
@@ -343,23 +345,23 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
             new ThumbInstruction[]
             {
                 // 0---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
                 // 1---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
             },
             // 1110
             new ThumbInstruction[]

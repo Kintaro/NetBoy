@@ -8,6 +8,7 @@ using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Branch;
 using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Arithmetic;
 using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Logical;
 using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Memory;
+using NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.PsrTransfer;
 
 namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
 {
@@ -44,13 +45,13 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
             new ArmInstruction[]
             {
                 // 0---
+                new MsrInstruction(),
                 new NopInstruction(),
-                new NopInstruction(),
-                new BxInstruction(),
+                new MsrInstruction(),
                 new TeqInstruction(),
+                new MrsInstruction(),
                 new CmpInstruction(),
-                new CmpInstruction(),
-                new NopInstruction(),
+                new MsrInstruction(),
                 new NopInstruction(),
                 // 1---
                 new OrInstruction(),
@@ -75,8 +76,8 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
                 new NopInstruction(),
                 new NopInstruction(),
                 // 1---
-                new NopInstruction(),
-                new NopInstruction(),
+                new AddInstruction(),
+                new AddInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
@@ -110,88 +111,88 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
             new ArmInstruction[]
             {
                 // 0---
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
                 // 1---
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
             },
             // 0101
             new ArmInstruction[]
             {
                 // 0---
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
                 // 1---
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
             },
             // 0110
             new ArmInstruction[]
             {
                 // 0---
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
                 // 1---
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
             },
             // 0111
             new ArmInstruction[]
             {
                 // 0---
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
                 // 1---
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
-                new LdrInstruction(),
+                new StrInstruction(),
                 new LdrInstruction(),
             },
             // 1000
@@ -264,23 +265,23 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
             new ArmInstruction[]
             {
                 // 0---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
                 // 1---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
+                new BranchLinkInstruction(),
             },
             // 1100
             new ArmInstruction[]

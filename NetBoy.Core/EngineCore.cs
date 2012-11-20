@@ -31,7 +31,7 @@ namespace NetBoy.Core
         public void LoadBios(string path)
         {
             var reader = new BinaryReader(new FileStream(path, FileMode.Open));
-            this.memoryManager.InternalMemory.Bios.SetMemory(reader.ReadBytes((int)reader.BaseStream.Length));
+            this.memoryManager.InternalMemory.Memory.SetMemory(0, reader.ReadBytes((int)reader.BaseStream.Length));
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace NetBoy.Core
             this.executionCore = new ExecutionCore(this.memoryManager);
 
             this.LoadBios(pathToBios);
-            this.executionCore.PC.Value = InternalMemory.BiosStart;
+            this.executionCore.PC.Value = 0x0u;
             this.executionCore.Run();
         }
     }
