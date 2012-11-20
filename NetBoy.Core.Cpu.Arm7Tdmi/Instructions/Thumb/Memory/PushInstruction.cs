@@ -16,7 +16,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Memory
             var registerList = opcode & 0xFFu;
             var pclr = ((opcode & 0x100u) >> 8) == 1;
 
-            var start = (uint)(executionCore.R(13).Value - (BitHelper.BitCount(registerList) + (pclr ? 1 : 0)) * 8);
+            var start = (uint)(executionCore.R(13).Value - (BitHelper.BitCount(registerList) + (pclr ? 1 : 0)) * 4);
             executionCore.R(13).Value = start;
 
             for (var i = 0; i < 8; ++i)
