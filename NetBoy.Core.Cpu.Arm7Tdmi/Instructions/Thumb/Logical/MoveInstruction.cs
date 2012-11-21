@@ -25,10 +25,16 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
             // Move source register into destination register
             else if ((opcode & 0x400u) == 0x400u)
             {
-                var rd = (opcode & 0x7u);
-                var rs = ((opcode & 0x38u) >> 3);
+                var msbd = (opcode & 0x80u) >> 4;
+                var msbs = (opcode & 0x40u) >> 3;
 
-                executionCore.R(rd).Value = executionCore.R(rs).Value;
+                var rd = (opcode & 0x7u) | msbd;
+                var rs = ((opcode & 0x38u) >> 3) | msbs;
+
+                if (rs == 0xFu)
+                    executionCore.R(rd).Value = executionCore.R(rs).Value + 4;
+                else
+                    executionCore.R(rd).Value = executionCore.R(rs).Value;
                 executionCore.CurrentProgramStatusRegister.Zero = executionCore.R(rd).Value == 0;
             }
             // Move source register into destination register
@@ -59,8 +65,11 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Logical
             // Move source register into destination register
             else if ((opcode & 0x400u) == 0x400u)
             {
-                var rd = opcode & 0x7u;
-                var rs = (opcode & 0x38u) >> 3;
+                var msbd = (opcode & 0x80u) >> 4;
+                var msbs = (opcode & 0x40u) >> 3;
+
+                var rd = (opcode & 0x7u) | msbd;
+                var rs = ((opcode & 0x38u) >> 3) | msbs;
 
                 return "mov #" + rd + ", #" + rs;
             }

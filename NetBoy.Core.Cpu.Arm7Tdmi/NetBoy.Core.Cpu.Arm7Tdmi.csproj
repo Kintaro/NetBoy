@@ -49,6 +49,7 @@
     <Compile Include="Instructions\Arm\Branch\BranchInstruction.cs" />
     <Compile Include="Instructions\Arm\Branch\BranchLinkInstruction.cs" />
     <Compile Include="Instructions\Arm\Branch\BxInstruction.cs" />
+    <Compile Include="Instructions\Arm\DataProcessing.cs" />
     <Compile Include="Instructions\Arm\Logical\MoveInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\NopInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\OrInstruction.cs" />

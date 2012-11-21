@@ -18,6 +18,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Branch
 
             var rs = (opcode & 0x38u) >> 3;
             var rd = (opcode & 0x7u);         
+
             if ((executionCore.R(rs).Value & 0x8u) == 0)
             {
                 if ((hs & 0x1u) != 0)

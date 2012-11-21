@@ -141,6 +141,23 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static string ShiftTypeAsString(uint type)
+        {
+            switch (type)
+            {
+                case 0: return "lsl";
+                case 1: return "lsr";
+                case 2: return "asr";
+                case 3: return "ror";
+                default: throw new NotSupportedException();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
         public static int BitCount(uint n)

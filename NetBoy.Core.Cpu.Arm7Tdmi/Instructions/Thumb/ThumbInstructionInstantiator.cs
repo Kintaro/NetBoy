@@ -373,14 +373,14 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb
             new ThumbInstruction[]
             {
                 // 0---
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
+                new BranchInstruction(),
                 // 1---
                 new LongBranchInstruction(),
                 new LongBranchInstruction(),
