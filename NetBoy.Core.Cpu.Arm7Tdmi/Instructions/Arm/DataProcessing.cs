@@ -31,6 +31,16 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
             return (opcode & 0xF0000u) >> 16;
         }
 
+        public static uint RnOperandValue(ExecutionCore executionCore, uint opcode)
+        {
+            if (RnOperand(opcode) < 0xFu)
+                return executionCore.R(RnOperand(opcode)).Value;
+            if (!HasImmediateOperand(opcode) && DoesShiftByRegister(opcode))
+                return executionCore.R(RnOperand(opcode)).Value + 12;
+            else
+                return executionCore.R(RnOperand(opcode)).Value + 8;
+        }
+
         public static uint RetrieveSecondOperand(ExecutionCore executionCore, uint opcode)
         {
             var registerAsSecondOperand = !HasImmediateOperand(opcode);

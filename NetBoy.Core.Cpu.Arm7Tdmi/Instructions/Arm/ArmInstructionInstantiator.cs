@@ -32,7 +32,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
                 new NopInstruction(),
                 new NopInstruction(),
                 // 1---
-                new NopInstruction(),
+                new AddInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
                 new NopInstruction(),
@@ -46,7 +46,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
             {
                 // 0---
                 new MsrInstruction(),
-                new NopInstruction(),
+                new TstInstruction(),
                 new MsrInstruction(),
                 new TeqInstruction(),
                 new MrsInstruction(),
@@ -58,10 +58,10 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
                 new OrInstruction(),
                 new MoveInstruction(),
                 new MoveInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new BitClearInstruction(), 
+                new BitClearInstruction(), 
+                new NopInstruction(), 
+                new NopInstruction(), 
             },
             // 0010
             new ArmInstruction[]
@@ -90,7 +90,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
             {
                 // 0---
                 new NopInstruction(),
-                new NopInstruction(),
+                new TstInstruction(),
                 new NopInstruction(),
                 new TeqInstruction(),
                 new CmpInstruction(),
@@ -102,8 +102,8 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
                 new OrInstruction(),
                 new MoveInstruction(),
                 new MoveInstruction(),
-                new NopInstruction(),
-                new NopInstruction(),
+                new BitClearInstruction(), 
+                new BitClearInstruction(), 
                 new NopInstruction(),
                 new NopInstruction(),
             },

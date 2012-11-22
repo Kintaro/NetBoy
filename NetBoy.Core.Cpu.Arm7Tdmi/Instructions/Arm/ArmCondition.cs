@@ -62,7 +62,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
                 case ArmCondition.Negative: return "mi";
                 case ArmCondition.Positive: return "pl";
                 case ArmCondition.Overflow: return "vs";
-                case ArmCondition.NoOverflow: return "vc";
+                case ArmCondition.NoOverflow: return "";
                 case ArmCondition.UnsignedHigher: return "hi";
                 case ArmCondition.UnsignedLowerOrSame: return "ls";
                 case ArmCondition.GreaterOrEqual: return "ge";
@@ -70,7 +70,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
                 case ArmCondition.GreaterThan: return "gt";
                 case ArmCondition.LessOrEqual: return "le";
                 case ArmCondition.Always: return "";
-                case ArmCondition.Never: return "nv";
+                case ArmCondition.Never: return "";
             }
 
             throw new NotSupportedException();

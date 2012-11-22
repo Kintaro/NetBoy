@@ -50,10 +50,12 @@
     <Compile Include="Instructions\Arm\Branch\BranchLinkInstruction.cs" />
     <Compile Include="Instructions\Arm\Branch\BxInstruction.cs" />
     <Compile Include="Instructions\Arm\DataProcessing.cs" />
+    <Compile Include="Instructions\Arm\Logical\BitClearInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\MoveInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\NopInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\OrInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\TeqInstruction.cs" />
+    <Compile Include="Instructions\Arm\Logical\TstInstruction.cs" />
     <Compile Include="Instructions\Arm\Memory\LdrInstruction.cs" />
     <Compile Include="Instructions\Arm\Memory\StrInstruction.cs" />
     <Compile Include="Instructions\Arm\PsrTransfer\MrsInstruction.cs" />
