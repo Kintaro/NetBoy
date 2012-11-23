@@ -42,7 +42,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm
         /// <returns></returns>
         public static ArmCondition Decode(uint opcode)
         {
-            var code = (opcode & 0xE0000000u) >> 29;
+            var code = (opcode & 0xF0000000u) >> 28;
             return (ArmCondition)code;
         }
 
