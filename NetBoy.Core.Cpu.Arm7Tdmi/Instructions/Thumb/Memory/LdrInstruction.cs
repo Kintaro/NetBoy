@@ -22,10 +22,10 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Memory
                 rd = (opcode & 0x700u) >> 8;
                 rb = 15;
                 offset = opcode & 0xFFu;
-                offset = offset * 4 + 2;
+                offset = offset * 4;
             }
 
-            var address = executionCore.R(rb).Value + offset;
+            var address = rb == 15 ? ((executionCore.PC.Value + 4) & ~2u) + offset : executionCore.R(rb).Value + offset;
 
             executionCore.R(rd).Value = executionCore.memoryManager.GetMemoryRegionForAddress(address).Read32(address);
 

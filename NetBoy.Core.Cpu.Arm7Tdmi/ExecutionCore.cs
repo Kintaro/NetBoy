@@ -141,7 +141,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
             {
                 var high = (thumbOpcode & 0xF000u) >> 12;
                 var low = (thumbOpcode & 0x0F00u) >> 8;
-                Console.WriteLine("[{7,-10}] 0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X4") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(thumbOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}]", 
+                Console.WriteLine("[{7,-10}] 0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X4") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(thumbOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}] {8:X}", 
                     this.CurrentProgramStatusRegister.Signed ? "N" : " ",
                     this.CurrentProgramStatusRegister.Zero ? "Z" : " ",
                     this.CurrentProgramStatusRegister.Overflow ? "V" : " ",
@@ -149,7 +149,8 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
                     this.CurrentProgramStatusRegister.ThumbMode ? "T" : " ",
                     this.CurrentProgramStatusRegister.IrqDisable ? "I" : " ",
                     this.CurrentProgramStatusRegister.FiqDisable ? "F" : " ",
-                    this.ModeAsString
+                    this.ModeAsString,
+                    this.R(1).Value
                     );
 
                 return this.thumbInstructionInstantiator.Instructions[high][low].Execute(this, thumbOpcode);
@@ -158,7 +159,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
             {
                 var high = (armOpcode & 0xF000000u) >> 24;
                 var low = (armOpcode & 0x0F00000u) >> 20;
-                Console.WriteLine("[{7,-10}] 0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X8") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(armOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}]",
+                Console.WriteLine("[{7,-10}] 0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X8") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(armOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}] {8:X}",
                     this.CurrentProgramStatusRegister.Signed ? "N" : " ",
                     this.CurrentProgramStatusRegister.Zero ? "Z" : " ",
                     this.CurrentProgramStatusRegister.Overflow ? "V" : " ",
@@ -166,7 +167,8 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
                     this.CurrentProgramStatusRegister.ThumbMode ? "T" : " ",
                     this.CurrentProgramStatusRegister.IrqDisable ? "I" : " ",
                     this.CurrentProgramStatusRegister.FiqDisable ? "F" : " ",
-                    this.ModeAsString
+                    this.ModeAsString,
+                    this.R(1).Value
                     );
 
                 return this.armInstructionInstantiator.Instructions[high][low].Execute(this, armOpcode);
@@ -212,7 +214,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         {
             while (true)
             {
-                if (this.PC.Value == 0x9C2)
+                if (this.PC.Value == 0x9C6)
                     Console.WriteLine();
                 this.ExecuteCurrentInstruction();
                 //Console.ReadKey();

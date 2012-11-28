@@ -56,7 +56,9 @@
     <Compile Include="Instructions\Arm\Logical\OrInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\TeqInstruction.cs" />
     <Compile Include="Instructions\Arm\Logical\TstInstruction.cs" />
+    <Compile Include="Instructions\Arm\Memory\LdmInstruction.cs" />
     <Compile Include="Instructions\Arm\Memory\LdrInstruction.cs" />
+    <Compile Include="Instructions\Arm\Memory\StmInstruction.cs" />
     <Compile Include="Instructions\Arm\Memory\StrInstruction.cs" />
     <Compile Include="Instructions\Arm\PsrTransfer\MrsInstruction.cs" />
     <Compile Include="Instructions\Arm\PsrTransfer\MsrInstruction.cs" />

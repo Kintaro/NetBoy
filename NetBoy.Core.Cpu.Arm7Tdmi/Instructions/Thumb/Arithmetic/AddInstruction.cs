@@ -26,7 +26,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Arithmetic
                 var r = 0;
 
                 if (op == 0)
-                    executionCore.R(rd).Value = (uint)r;
+                    executionCore.R(rd).Value = (uint)(rsV + rnV);
                 else if (op == 2)
                     executionCore.R(rd).Value = (uint)(rsV + rn);
 

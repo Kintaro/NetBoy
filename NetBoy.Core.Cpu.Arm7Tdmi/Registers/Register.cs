@@ -12,5 +12,10 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Registers
     public class Register
     {
         public uint Value;
+
+        public override string ToString()
+        {
+            return string.Format("{0:X}", this.Value);
+        }
     }
 }

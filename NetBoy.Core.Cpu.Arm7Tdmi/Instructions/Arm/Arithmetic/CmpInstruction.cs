@@ -15,24 +15,14 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Arithmetic
         {
             var condition = ArmConditionDecoder.Decode(opcode);
 
-            var rn = (opcode & 0xF0000u) >> 16;
-            var rnV = executionCore.R(rn).Value;
+            var rn = DataProcessing.RnOperandValue(executionCore, opcode);
+            var op2 = DataProcessing.RetrieveSecondOperand(executionCore, opcode);
 
-            var immediate = (opcode & 0x2000000u) != 0;
-
-            var op2 = 0u;
-
-            if (immediate)
-            {
-                var nn = opcode & 0xFFu;
-                op2 = nn;
-            }
-            else
-                ;
-
-            var temp = rnV - op2;
+            var temp = rn - op2;
+            var carry = DataProcessing.DoesCreateCarry(opcode);
+            executionCore.CurrentProgramStatusRegister.Carry = carry;
             executionCore.CurrentProgramStatusRegister.Zero = temp == 0;
-            executionCore.CurrentProgramStatusRegister.Carry = !((int)rnV < (int)op2);
+            executionCore.CurrentProgramStatusRegister.Signed = (temp & 0x80000000u) != 0;
 
             return false;
         }
@@ -41,23 +31,30 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Arithmetic
         {
             var condition = ArmConditionDecoder.Decode(opcode);
 
-            var rn = (opcode & 0xF0000u) >> 16;
+            var rn = DataProcessing.RnOperand(opcode);
 
-            var immediate = (opcode & 0x2000000u) != 0;
-            var op2 = 0u;
-
-            if (immediate)
+            if (DataProcessing.HasImmediateOperand(opcode))
             {
-                var nn = opcode & 0xFFu;
-                op2 = nn;
+                var shiftAmount = DataProcessing.ImmediateShiftAmount(opcode);
+                var immediate = DataProcessing.OperandImmediate(opcode);
+
+                return string.Format("cmp{0} r{1}, 0x{2:X}", ArmConditionDecoder.ToString(condition), rn, BitHelper.Ror(immediate, shiftAmount * 2));
             }
             else
-                ;
+            {
+                var rm = DataProcessing.OperandRegister(opcode);
 
-            if (immediate)
-                return string.Format("cmp{0} r{1}, 0x{2}", ArmConditionDecoder.ToString(condition), rn, op2);
-            else
-                return string.Format("cmp{0} r{1}, r{2}", ArmConditionDecoder.ToString(condition), rn, op2);
+                if (DataProcessing.DoesShiftByRegister(opcode))
+                {
+                    var rs = DataProcessing.ImmediateShiftAmount(opcode);
+                    return string.Format("cmp{0} r{1}, r{2}, {3} r{4}", ArmConditionDecoder.ToString(condition), rn, rm, BitHelper.ShiftTypeAsString(DataProcessing.ShiftType(opcode)), rs);
+                }
+                else
+                {
+                    var rs = DataProcessing.ShiftAmount(opcode);
+                    return string.Format("cmp{0} r{1}, r{2}, {3} 0x{4:X}", ArmConditionDecoder.ToString(condition), rn, rm, BitHelper.ShiftTypeAsString(DataProcessing.ShiftType(opcode)), rs);
+                }
+            }
         }
     }
 }
