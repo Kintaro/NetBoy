@@ -25,20 +25,20 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Memory
 
             var start = executionCore.R(rn).Value;
 
-            for (var i = 0; i < 16; ++i)
+            for (var i = 15; i >= 0; --i)
             {
                 if ((registerList & (1u << i)) != (1u << i))
                     continue;
 
                 if (pre)
                 {
-                    start = start + (uint)(up ? 8 : -8);
+                    start = start + (uint)(up ? 4 : -4);
                     executionCore.R(i).Value = executionCore.memoryManager.GetMemoryRegionForAddress(start).Read32(start);
                 }
                 else
                 {
                     executionCore.R(i).Value = executionCore.memoryManager.GetMemoryRegionForAddress(start).Read32(start);
-                    start = start + (uint)(up ? 8 : -8);
+                    start = start + (uint)(up ? 4 : -4);
                 }
             }
 

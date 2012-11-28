@@ -141,7 +141,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
             {
                 var high = (thumbOpcode & 0xF000u) >> 12;
                 var low = (thumbOpcode & 0x0F00u) >> 8;
-                Console.WriteLine("[{7,-10}] 0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X4") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(thumbOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}] {8:X}", 
+                Console.WriteLine("[{7,-10}] 0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X4") + ") " + this.thumbInstructionInstantiator.Instructions[high][low].InstructionAsString(thumbOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}]", 
                     this.CurrentProgramStatusRegister.Signed ? "N" : " ",
                     this.CurrentProgramStatusRegister.Zero ? "Z" : " ",
                     this.CurrentProgramStatusRegister.Overflow ? "V" : " ",
@@ -159,7 +159,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
             {
                 var high = (armOpcode & 0xF000000u) >> 24;
                 var low = (armOpcode & 0x0F00000u) >> 20;
-                Console.WriteLine("[{7,-10}] 0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X8") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(armOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}] {8:X}",
+                Console.WriteLine("[{7,-10}] 0x" + this.PC.Value.ToString("X8") + "> (0x" + opcode.ToString("X8") + ") " + this.armInstructionInstantiator.Instructions[high][low].InstructionAsString(armOpcode) + " [{0}{1}{2}{3}|{4}{5}{6}]",
                     this.CurrentProgramStatusRegister.Signed ? "N" : " ",
                     this.CurrentProgramStatusRegister.Zero ? "Z" : " ",
                     this.CurrentProgramStatusRegister.Overflow ? "V" : " ",
@@ -214,10 +214,9 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi
         {
             while (true)
             {
-                if (this.PC.Value == 0x9C6)
+                if (this.PC.Value == 0xC0C)
                     Console.WriteLine();
                 this.ExecuteCurrentInstruction();
-                //Console.ReadKey();
             }
         }
 

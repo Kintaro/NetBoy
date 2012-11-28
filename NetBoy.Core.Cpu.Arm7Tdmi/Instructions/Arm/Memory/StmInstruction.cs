@@ -32,13 +32,13 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Memory
 
                 if (pre)
                 {
-                    start = start + (uint)(up ? 8 : -8);
+                    start = start + (uint)(up ? 4 : -4);
                     executionCore.memoryManager.GetMemoryRegionForAddress(start).Write32(start, executionCore.R(i).Value);
                 }
                 else
                 {
                     executionCore.memoryManager.GetMemoryRegionForAddress(start).Write32(start, executionCore.R(i).Value);
-                    start = start + (uint)(up ? 8 : -8);
+                    start = start + (uint)(up ? 4 : -4);
                 }
 
                 if (write)
@@ -50,7 +50,7 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Arm.Memory
 
         public override string InstructionAsString(uint opcode)
         {
- 	        var condition = ArmConditionDecoder.Decode(opcode);
+            var condition = ArmConditionDecoder.Decode(opcode);
             var pre = (opcode & 0x1000000u) != 0;
             var up = (opcode & 0x0800000u) != 0;
             var psr = (opcode & 0x0400000u) != 0;

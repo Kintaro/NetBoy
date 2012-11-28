@@ -23,9 +23,10 @@ namespace NetBoy.Core.Cpu.Arm7Tdmi.Instructions.Thumb.Branch
             }
             else if (upperOpcode == 0x1Fu)
             {
+                var pc = executionCore.PC.Value;
                 executionCore.PC.Value = executionCore.R(14).Value + (nn << 1);
                 executionCore.PC.Value = executionCore.PC.Value & 0x7FFFFFu;
-                executionCore.R(14).Value = (executionCore.PC.Value + 2) | 0x1u; 
+                executionCore.R(14).Value = (pc + 2) | 0x1u; 
                 return true;
             }
             else if (upperOpcode == 0x1Du)
